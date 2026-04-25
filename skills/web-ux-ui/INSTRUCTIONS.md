@@ -23,8 +23,9 @@ Ensure all interactive elements (buttons, links, inputs) have:
 ## 3. Implementation Workflow
 
 1.  **Draft Structure**: Build the semantic HTML/JSX structure first.
-2.  **Debug Mode (Mandatory)**: During development, implement a visible debug layer or log console (usually at the bottom of the page) that captures API errors and state changes. Never let an error fail silently.
-3.  **Admin Area (/admin)**: Every app MUST include a protected `/admin` route. This area must provide:
+2.  **Instant Feedback (Optimistic UI)**: For interactive lists (Tasks, Routines), implement optimistic updates. User actions should be reflected in the UI immediately without waiting for server confirmation (using `useOptimistic` or similar patterns).
+3.  **Debug Mode (Mandatory)**: During development, implement a visible debug layer or log console (usually at the bottom of the page) that captures API errors and state changes. Never let an error fail silently.
+4.  **Admin Area (/admin)**: Every app MUST include a protected `/admin` route. This area must provide:
     - User Management (view/edit subscribers).
     - Settings Management (plans, feature flags, global constants).
     - Database Health check.
