@@ -8,6 +8,19 @@ description: Security, code quality, testing, and performance checklist to run a
 
 This skill runs at confirmed checkpoints, not continuously. Execute the sections in the order shown, report problems found, and propose corrections before proceeding.
 
+4.  **Checkpoint Report**: At the end of the review, you MUST provide a standardized table. Do not skip categories. If no issues were found, mark as ✅.
+
+### 🏁 Checkpoint Summary: [Milestone Name]
+| Category | Status | Notes / Fixes Made |
+|----------|--------|-------------------|
+| **Security** | ✅/❌ | RLS, Env vars, Sanitization |
+| **Code Quality** | ✅/❌ | TS types, clean imports, naming |
+| **Performance** | ✅/❌ | Optimistic UI, bundle size |
+| **UI / CSS** | ✅/❌ | Tokens used, responsiveness, hover states |
+| **Context Specific** | ✅/❌ | Proactively find issues unique to THIS project |
+
+**🚨 Proactive Audit**: Oltre alle categorie standard, DEVI analizzare il progetto per identificare rischi o debiti tecnici specifici che non sono elencati sopra. Non limitarti a una lista passiva.
+
 ---
 
 ## How to Run a Checkpoint
@@ -160,6 +173,7 @@ Commit frequently to create "Save Points." Don't wait for the end of the day.
 - **After every Checkpoint**: Once an area is marked as STABLE, commit it immediately.
 - **After major fixes**: If you spent 30 minutes fixing a bug, commit it once it works.
 - **Before major refactors**: Save the current state before you start changing everything.
+- **🚨 COMMIT AUTHORIZATION**: Prima di eseguire qualsiasi comando di `git commit` o `git push`, devi fermarti e chiedere esplicitamente: *"Ho completato [task/checkpoint], posso procedere con il commit e il push?"*. Non dare mai per scontato che l'utente voglia pushare immediatamente, specialmente se il push attiva un deploy automatico (Vercel/Netlify).
 - **Never** commit code that doesn't build or has red tests.
 
 ### When to Push to GitHub

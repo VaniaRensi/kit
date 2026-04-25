@@ -25,6 +25,8 @@ L'obiettivo è definire la visione. Prima di generare l'Handoff per la fase di c
 4.  **FASE 3: CONTROLLO (QUALITÀ)**: Security audits, refactoring, and stability verification.
 5.  **FASE 4: LANCIO (CONTENUTI)**: SEO, final copy, and user documentation.
 
+**🚨 Phase-Gate Protocol**: Ogni Milestone deve concludersi con un Audit completo (Tabella Checkpoint) PRIMA di poter pianificare la Milestone successiva. Non saltare mai questa fase.
+
 ---
 
 ## 🚦 Phase Gates & Transition

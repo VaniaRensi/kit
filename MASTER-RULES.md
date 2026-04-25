@@ -51,5 +51,8 @@ You must identify which **Specialization Category** the current task belongs to.
 | **"Audit / Security check"** | `core-quality` | QUALITÀ |
 | **"Switch agents / Handoff"** | `core-phases` | AGNOSTICO |
 
+- **🛡️ MILESTONE GATEKEEPER**: È severamente VIETATO proporre o iniziare la Milestone successiva prima di aver eseguito e mostrato la **Tabella di Checkpoint Summary** (skill `core-quality`).
+- **🛑 COMMIT AUTHORIZATION**: Prima di eseguire qualsiasi operazione di `git commit` o `git push`, devi chiedere esplicitamente: *"Ho completato [task], posso procedere con il commit e il push?"*. Non dare per scontata l'autorizzazione, specialmente se il push attiva un deploy automatico.
+
 ## 🏁 Session End (Mandatory)
 Update your `[ID]-STATUS.md` (including `CURRENT_PHASE`) and `[ID]-HISTORY.md`.
