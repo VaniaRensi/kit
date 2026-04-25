@@ -1,0 +1,165 @@
+id: core-quality
+order: 50
+name: "Security & Quality"
+description: "Enforce security, credential management, and git conventions via systematic checklists."
+category: QUALITÀ
+level: [beginner, experienced]
+platform: [all]
+language: [all]
+tags: [security, quality, testing, git, code-review, checkpoint]
+note: "Some items (CORS, JS bundles, images) are web-specific and will be extracted into web-deploy in the future."
+use_with: [core-workflow]
+principles:
+  - name: "No Hardcoded Credentials"
+    summary: "API keys and secrets live in .env files only. .env is always in .gitignore."
+    what: "Every secret — API key, database password, token — lives in an environment variable, never in source code. .env files are always excluded from version control."
+    why: "Git history is permanent. A secret committed even once and immediately removed is still in the history. Repositories get exposed; hardcoded credentials get stolen."
+    without: "One public GitHub push exposes your production database. Attackers scan GitHub continuously for leaked credentials. The blast radius is immediate and irreversible."
+    bad: |
+      const stripe = new Stripe('sk_live_4eC39HqLyjWDarjtT1zdp7dc')
+      const db = postgres('postgres://admin:mypassword@prod-db.example.com/app')
+      const jwt = sign(payload, 'my-super-secret-key-123')
+    good: |
+      // .env (never committed)
+      // STRIPE_SECRET_KEY=sk_live_...
+      // DATABASE_URL=postgres://...
+      // JWT_SECRET=...
+
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+      const db = postgres(process.env.DATABASE_URL)
+      const jwt = sign(payload, process.env.JWT_SECRET)
+
+  - name: "Input Sanitization"
+    summary: "All user input is validated and sanitized before touching queries, commands, or markup."
+    what: "Every value that enters the system from outside — form fields, URL params, API payloads — is validated for type and format, and sanitized before being used in queries, shell commands, or HTML."
+    why: "The majority of critical vulnerabilities — SQL injection, XSS, command injection — come from treating untrusted input as safe. Validation at the boundary stops entire vulnerability classes."
+    without: "A user submits '; DROP TABLE users; -- as a form value. If that reaches a raw SQL query, your data is gone. No sanitization means trusting every user not to be malicious."
+    bad: |
+      app.get('/user', async (req, res) => {
+        const id = req.query.id
+        const user = await db.query(`SELECT * FROM users WHERE id = '${id}'`)
+        res.json(user)
+      })
+    good: |
+      import { z } from 'zod'
+
+      const schema = z.object({ id: z.string().uuid() })
+
+      app.get('/user', async (req, res) => {
+        const { id } = schema.parse(req.query)  // throws if invalid
+        const user = await db.query('SELECT * FROM users WHERE id = $1', [id])
+        res.json(user)
+      })
+
+  - name: "Auth at Every Layer"
+    summary: "Protected routes verify authentication. Sensitive actions verify permissions — not just auth."
+    what: "Authentication (who are you?) and authorization (what are you allowed to do?) are checked at every relevant boundary — route, API endpoint, and business action — not just at login."
+    why: "Checking auth only on the frontend is theater. A direct API call bypasses all of it. Real protection lives in the server layer, checked on every request."
+    without: "A logged-in user hits DELETE /api/user/123 directly. If the server only checks 'is user authenticated' and not 'does this user own resource 123', any user can delete any account."
+    bad: |
+      // Frontend hides the button — but the API is wide open
+      app.delete('/api/posts/:id', async (req, res) => {
+        const post = await db.posts.findOne(req.params.id)
+        await db.posts.delete(req.params.id)
+        res.json({ ok: true })
+      })
+    good: |
+      app.delete('/api/posts/:id', requireAuth, async (req, res) => {
+        const post = await db.posts.findOne(req.params.id)
+        if (post.authorId !== req.user.id) return res.status(403).json({ error: 'Forbidden' })
+        await db.posts.delete(req.params.id)
+        res.json({ ok: true })
+      })
+
+  - name: "Single Responsibility"
+    summary: "Every function does one thing, under ~50 lines. Longer functions get split before merging."
+    what: "Quality requires reviewable code. Functions longer than ~50 lines are split before the PR is opened — not because of style, but because long functions hide bugs."
+    why: "Reviewers stop reading carefully at around 50 lines. Bugs in long functions are consistently harder to spot and harder to test in isolation."
+    without: "A 300-line function gets approved in code review because nobody traces every path. Six weeks later, an edge case in line 247 causes a production incident."
+    bad: |
+      async function processOrder(orderId) {
+        // 1. validate order (30 lines)
+        // 2. check inventory (25 lines)
+        // 3. calculate pricing (40 lines)
+        // 4. charge payment (35 lines)
+        // 5. send confirmation email (20 lines)
+        // 6. update analytics (15 lines)
+        // total: 165 lines, 6 reasons to fail
+      }
+    good: |
+      async function processOrder(orderId) {
+        const order = await validateOrder(orderId)
+        await reserveInventory(order)
+        const price = calculateOrderPrice(order)
+        const payment = await chargePayment(order, price)
+        await sendOrderConfirmation(order, payment)
+        await trackOrderEvent(order)
+      }
+      // each sub-function: under 30 lines, single job
+
+  - name: "Explicit Error Handling"
+    summary: "Every async operation has a catch. Errors surface as readable messages, not stack traces."
+    what: "Every async call has explicit error handling. Failures are caught, logged appropriately, and presented to users as clear, actionable messages — not raw exceptions."
+    why: "Unhandled promise rejections crash silently or surface as cryptic errors. Users see 'Something went wrong' with no recourse. Developers see no logs."
+    without: "fetch('/api/data') with no .catch(). The request fails due to a network timeout. The UI freezes. The user has no idea what happened and no way to retry."
+    bad: |
+      async function loadDashboard() {
+        const data = await fetch('/api/dashboard').then(r => r.json())
+        renderCharts(data)
+      }
+    good: |
+      async function loadDashboard() {
+        try {
+          const response = await fetch('/api/dashboard')
+          if (!response.ok) throw new Error(`API error: ${response.status}`)
+          const data = await response.json()
+          renderCharts(data)
+        } catch (error) {
+          logger.error('Dashboard load failed', { error })
+          showErrorState('Could not load dashboard. Try refreshing.')
+        }
+      }
+
+  - name: "Test Critical Paths"
+    summary: "Auth, payments, and data writes have tests covering both the happy path and failure cases."
+    what: "The highest-risk operations — authentication, payment flows, data mutations — have automated tests for the success case and at least one explicit failure case."
+    why: "These are the paths where bugs cost real money, real data, or real users. Manual testing covers the happy path; tests cover the edge cases you don't think to try."
+    without: "A refactor changes how auth tokens are verified. All manual tests pass. The failure case — invalid token — now silently succeeds. Production breaks for all users with expired sessions."
+    bad: |
+      // No test for login failure:
+      it('logs in successfully', async () => {
+        const result = await login('user@example.com', 'correctpassword')
+        expect(result.token).toBeDefined()
+      })
+      // What happens with wrong password? With expired account? Never tested.
+    good: |
+      it('logs in with valid credentials', async () => {
+        const result = await login('user@example.com', 'correct')
+        expect(result.token).toBeDefined()
+      })
+      it('rejects wrong password', async () => {
+        await expect(login('user@example.com', 'wrong')).rejects.toThrow('Invalid credentials')
+      })
+      it('rejects suspended account', async () => {
+        await expect(login('suspended@example.com', 'correct')).rejects.toThrow('Account suspended')
+      })
+
+  - name: "Conventional Commits"
+    summary: "type(scope): short description in English — with Author and Reason in the body."
+    what: "Commits follow the format type(scope): short description. Types: feat, fix, refactor, chore, docs, test. The body explains why, not what."
+    why: "A consistent commit history is readable history. It enables changelogs, makes bisect faster, and lets any developer understand what changed and why at a glance."
+    without: "'fix stuff', 'wip', 'asdf' — a history of meaningless messages is no history at all. When a bug is introduced, you can't trace when or why. git blame tells you nothing."
+    bad: |
+      git commit -m "fix"
+      git commit -m "update stuff"
+      git commit -m "wip login"
+      git commit -m "final version"
+      git commit -m "FINAL version 2"
+    good: |
+      git commit -m "fix(auth): reject expired JWT tokens before route handler
+
+      Tokens were only validated on login, not on each request.
+      A token expired mid-session would pass through undetected.
+
+      Author: Jane Smith
+      Reason: User reported staying logged in after account suspension."

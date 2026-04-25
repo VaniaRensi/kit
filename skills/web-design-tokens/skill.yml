@@ -1,0 +1,38 @@
+id: web-design-tokens
+order: 70
+name: "Design Tokens"
+description: "Build maintainable systems using a tiered token architecture and derived color variance."
+category: SVILUPPO
+level: [experienced]
+platform: [web]
+language: [css, all]
+tags: [tokens, design-system, css, variables, theme]
+use_with: [web-ux-ui, core-ux]
+principles:
+  - name: "Tiered Token Architecture"
+    summary: "Organize tokens in 3 layers: Primitive, Semantic, and Component."
+    what: "1. Primitives (raw values). 2. Semantic (meaning: --color-primary). 3. Component (context: --button-bg). Reference tokens, never raw values."
+    why: "Allows for system-wide updates (rebranding, dark mode) by changing a single layer of semantic definitions."
+    bad: "Hardcoding primitive values directly in component styles."
+    good: "Component → Semantic Token → Primitive Value."
+
+  - name: "Derived Variance (Shades & Alpha)"
+    summary: "Create UI depth using shades and transparency levels from the restricted brand palette."
+    what: "Instead of adding new colors, derive all UI variance from the core palette using: 1. Shade Scales (Lightness variations) and 2. Alpha Channels (Transparency levels)."
+    why: "Ensures perfect color harmony. Using a 5% transparency of your brand color for a background is always more elegant than picking a random 'off-white' that doesn't share the same hue."
+    bad: "Picking a random gray for a border when you could use a 20% alpha of your primary or neutral color."
+    good: "Defining a 'Surface' token as 'oklch(from var(--primary) l c h / 0.1)'."
+
+  - name: "Fluid Scaling & Typographic Leading"
+    summary: "Use math-based scaling for spacing and geometry-based leading for typography."
+    what: "Spacing and font sizes scale continuously using clamp(). Line height is derived from the font's actual geometry (e.g., ex-based formulas) for optical consistency."
+    why: "Eliminates breakpoint maintenance and ensures the UI feels proportional and 'balanced' on every device."
+    bad: "Using media queries to manually update padding or line-height at specific screen widths."
+    good: "A single 'clamp' declaration that handles the entire viewport range."
+
+  - name: "Contextual Adaptation"
+    summary: "Redefine tokens at the surface level so children adapt automatically."
+    what: "Assign a 'surface' property to a container that redefines semantic tokens (background, text, link). Child elements adapt without manual overrides."
+    why: "Makes 'Dark Mode' or 'Brand Sections' trivial to implement and maintain."
+    bad: "Writing specific CSS rules to change text color for every element inside a dark section."
+    good: "Redefining '--color-surface' and '--color-text' once at the section level."

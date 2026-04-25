@@ -1,0 +1,60 @@
+id: core-ux
+order: 40
+name: "UX Principles"
+description: "Apply universal hierarchy, accessibility, and harmony principles to any interface."
+category: STRATEGIA
+level: [beginner, experienced]
+platform: [web, mobile, desktop]
+language: [all]
+tags: [ux, ui, spacing, hierarchy, accessibility, feedback, readability]
+note: "Principles are universal. Implementation details belong to specific platform skills."
+use_with: [web-ux-ui, web-design-tokens]
+principles:
+  - name: "Visual Hierarchy"
+    summary: "Size, weight, and contrast communicate importance, guiding the user's eye."
+    what: "Use visual weight to establish a clear order of importance. The most critical action or information must be the most prominent."
+    why: "Users scan before they read. Clear hierarchy reduces cognitive load and directs focus."
+    bad: "Multiple primary buttons or headings of the same size competing for attention."
+    good: "One clear primary action, with secondary and tertiary information styled progressively lighter."
+
+  - name: "Spatial Consistency"
+    summary: "Use a fixed scale for spacing to signal relationships and create rhythm."
+    what: "Spacing follows a predefined scale. Proximity determines relationship: related elements are grouped tightly, unrelated elements are separated clearly."
+    why: "Rhythm creates a predictable, professional feel that users trust subconsciously."
+    bad: "Varying gaps between similar elements (e.g., 10px here, 15px there)."
+    good: "Every gap is a step on a consistent scale (e.g., 4, 8, 16, 32, 64)."
+
+  - name: "Universal Readability"
+    summary: "Optimize line length, line height, and contrast for effortless consumption."
+    what: "Maintain optimal line lengths (typically 60-75 characters), sufficient leading (line height), and high contrast between text and background."
+    why: "Prevents eye fatigue and ensures the content is accessible to all users in various lighting conditions."
+    bad: "Light gray text on white, or paragraphs that span the entire width of a wide screen."
+    good: "High contrast (WCAG AA 4.5:1), generous line height, and constrained paragraph widths."
+
+  - name: "Visual Harmony & Color Restriction"
+    summary: "Elegance comes from a restricted palette with high internal variance."
+    what: "Use a maximum of 3–4 base colors. Create depth and distinction using shades (lightness) and alpha (transparency) of those core colors, rather than introducing new ones."
+    why: "A narrow palette ensures a professional and 'together' look. It prevents the interface from becoming a 'circus' of competing, uncoordinated colors."
+    bad: "A project with 12 different colors for different types of alerts or sections."
+    good: "A cohesive system where backgrounds and borders are all derived from the core brand colors."
+
+  - name: "Layered Distinction"
+    summary: "Every UI layer must be visually distinguishable from the one below it."
+    what: "Ensure that containers (cards, panels, modals) stand out from their background using contrast, borders, or shadows. Layers must never blend together."
+    why: "Distinct layers communicate structure and depth, helping the user understand the layout's organization."
+    bad: "A card background that is too similar to the page background, making boundaries invisible."
+    good: "Clear visual separation between the background, the surface, and the content."
+
+  - name: "Action Feedback"
+    summary: "Communicate the state of every interaction: loading, success, or error."
+    what: "Every user action must trigger a visible state change that confirms the system is processing, has succeeded, or has failed."
+    why: "Feedback builds trust and prevents users from repeating actions or feeling lost."
+    bad: "A button that doesn't change appearance after being clicked during a long process."
+    good: "Loading spinners, success toasts, and clear error messages with recovery steps."
+
+  - name: "Information Focus"
+    summary: "Each view has one primary goal. Secondary actions must not compete."
+    what: "Limit each screen to one primary call-to-action. Isolate destructive or complex operations."
+    why: "Reduces decision fatigue and guides the user toward the intended outcome."
+    bad: "Three bright blue buttons of the same size in the same row."
+    good: "One prominent primary button, secondary actions as outlines or text links."

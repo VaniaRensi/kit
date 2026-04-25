@@ -1,0 +1,45 @@
+id: core-workflow
+order: 20
+name: "Workflow AI"
+description: "Manage the end-to-end development lifecycle with structured kickoff, milestones, and session continuity."
+category: CONFIG
+level: [beginner, experienced]
+platform: [all]
+language: [all]
+tags: [process, workflow, methodology, kickoff, handoff, status]
+use_with: [core-historification, core-quality]
+principles:
+  - name: "Kickoff Alignment"
+    summary: "Align on goals, stack, and milestones before touching any code."
+    what: "Every feature starts with a structured kickoff: Define the goal, the user, the technology stack, and the milestone sequence."
+    why: "Prevents wasted effort and ensures the AI doesn't make incorrect starting assumptions."
+    bad: "Starting to generate code as soon as a user asks for a 'new feature'."
+    good: "Confirming the platform, libraries, and first milestone before writing the first file."
+
+  - name: "Sequential Milestones"
+    summary: "Work on one milestone at a time. Verify and mark STABLE before continuing."
+    what: "Break work into discrete milestones. Each must be verified and marked STABLE (tested and frozen) before the next begins."
+    why: "Isolates bugs and prevents compounding uncertainty across multiple unfinished features."
+    bad: "Refactoring the database, building a new UI, and adding an API endpoint simultaneously."
+    good: "Finishing the database migration first, verifying it, and then moving to the UI."
+
+  - name: "Autonomous Limits (2-Attempt Rule)"
+    summary: "Try two approaches to solve a blocker. If both fail, stop and hand off to the user."
+    what: "The AI makes two independent attempts to resolve a problem. If unsuccessful, it stops, explains the blocker, and asks for guidance."
+    why: "Prevents endless loops that consume tokens and time without making progress."
+    bad: "Trying the same failing fix with minor variations 5 times in a row."
+    good: "Reporting the failure after the second attempt and asking for the user's specific context."
+
+  - name: "Session Continuity (Living Memory)"
+    summary: "PROJECT-STATUS.md is the single source of truth for the current state."
+    what: "The AI updates PROJECT-STATUS.md at every milestone and session end. Every new session starts by reading this file and summarizing the current state in 3 lines."
+    why: "Since AI sessions have no memory, the status file is the project's 'external brain'. It ensures consistency across different sessions."
+    bad: "Ending a session without updating the status, forcing the next session to guess the progress."
+    good: "Closing every session with a clear 'STABLE / IN PROGRESS / NEXT' update."
+
+  - name: "Preserve Intent & Scope"
+    summary: "Only modify what is requested. No spontaneous styling or feature additions."
+    what: "Adhere strictly to the requested scope. Do not spontaneously change styles, buttons, or structures that weren't part of the instruction."
+    why: "Builds trust and prevents 'visual drift' caused by unrequested AI 'improvements'."
+    bad: "Adding a bold uppercase style to a menu when the user only asked to add a link."
+    good: "Adding the link using the exact same style as the surrounding elements."

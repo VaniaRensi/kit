@@ -1,0 +1,167 @@
+id: core-architecture
+order: 30
+name: "Architecture"
+description: "Implement scalable software architecture using SOLID principles, modular structures, and strict dependency boundaries."
+category: STRATEGIA
+level: [beginner, experienced]
+platform: [all]
+language: [all]
+tags: [architecture, modules, structure, solid, separation-of-concerns]
+use_with: [core-naming, core-quality]
+principles:
+  - name: "Single Responsibility"
+    summary: "Each file, function, or class does exactly one thing. If you need 'and' to describe it, split it."
+    what: "A unit of code — function, class, or file — has exactly one reason to change. It owns one concept and does one job."
+    why: "Small, focused units are easier to test, easier to understand, and easier to reuse. Changes are localized: fixing one thing doesn't break another."
+    without: "Functions that do 5 things fail in 5 different ways. Tests become fragile, bugs become hard to trace, and every change has unintended side effects."
+    bad: |
+      async function handleUser(id) {
+        const user = await db.users.findOne(id)
+        user.name = user.name.trim().toUpperCase()
+        await mailer.send(user.email, 'Welcome!')
+        await db.logs.insert({ userId: id, action: 'created' })
+        return user
+      }
+    good: |
+      async function getUser(id) { return db.users.findOne(id) }
+      function formatUser(user) { return { ...user, name: user.name.trim().toUpperCase() } }
+      async function sendWelcome(user) { await mailer.send(user.email, 'Welcome!') }
+      async function logUserCreated(id) { await db.logs.insert({ userId: id, action: 'created' }) }
+
+  - name: "Layer Separation"
+    summary: "UI, business logic, and data access are strictly isolated. No database calls in components."
+    what: "The codebase is divided into distinct layers: presentation (UI), domain (business rules), and data access. Each layer only talks to the one directly below it."
+    why: "You can swap a database, change a UI framework, or move business logic to a different service without rewriting the rest. Each layer can be tested independently."
+    without: "Database queries inside components make the UI untestable without a real database. Changing the data model requires hunting through 40 files. Reusing logic becomes impossible."
+    bad: |
+      // UserCard.tsx (UI component)
+      export function UserCard({ id }) {
+        const user = await db.query(`SELECT * FROM users WHERE id = ${id}`)
+        return <div>{user.name}</div>
+      }
+    good: |
+      // repository/users.ts
+      export function getUserById(id) { return db.query('SELECT * FROM users WHERE id = ?', [id]) }
+
+      // service/users.ts
+      export async function loadUserProfile(id) { return getUserById(id) }
+
+      // UserCard.tsx
+      export function UserCard({ id }) {
+        const user = await loadUserProfile(id)
+        return <div>{user.name}</div>
+      }
+
+  - name: "Feature-based Structure"
+    summary: "Group files by what they do together, not by their technical type."
+    what: "Files that serve the same feature — component, hook, service, types — live in the same folder. Not separate /components, /hooks, /services top-level folders."
+    why: "When you work on a feature, all the relevant files are in one place. Adding or deleting a feature is one folder operation instead of 6 separate edits across the project."
+    without: "To understand a single feature you navigate 5 directories. To delete it you hunt through the whole codebase. New team members can't map the code to product features."
+    bad: |
+      /components/UserCard.tsx
+      /components/OrderList.tsx
+      /hooks/useUser.ts
+      /hooks/useOrders.ts
+      /services/userService.ts
+      /services/orderService.ts
+      /types/user.ts
+      /types/order.ts
+    good: |
+      /features/user/
+        UserCard.tsx
+        useUser.ts
+        userService.ts
+        user.types.ts
+      /features/orders/
+        OrderList.tsx
+        useOrders.ts
+        orderService.ts
+        order.types.ts
+
+  - name: "Inward Dependencies"
+    summary: "Dependencies always point inward. Business logic never imports from UI or database layers."
+    what: "Inner layers (domain, core business logic) have zero knowledge of outer layers (UI, database drivers, HTTP). The dependency arrow always points inward."
+    why: "This is what makes layers actually independent. Business logic can run in a CLI, an API, or a job queue without modification. The domain stays portable."
+    without: "Business logic imports a React hook. Now you can't run it in a background job. Or worse: a bug in a UI library corrupts business logic. The architecture collapses under change."
+    bad: |
+      // domain/pricing.ts (business logic)
+      import { useCartStore } from '../store/cartStore'  // ← UI layer!
+      import { db } from '../database/client'           // ← data layer!
+
+      export function calculateDiscount(userId) {
+        const cart = useCartStore.getState()
+        const user = db.users.find(userId)
+        ...
+      }
+    good: |
+      // domain/pricing.ts (business logic — no external imports)
+      export function calculateDiscount(user, cartItems) {
+        // pure function: inputs in, result out
+        return cartItems.reduce((total, item) => total + item.price, 0) * user.discountRate
+      }
+
+  - name: "Rule of Three"
+    summary: "Duplicate once, extract on the third occurrence. Premature abstraction costs more than repetition."
+    what: "Copy code the first and second time. On the third similar occurrence, identify the pattern and extract a shared abstraction."
+    why: "Abstractions built on one example are almost always wrong — they generalize the wrong thing. Waiting for three instances reveals the real pattern."
+    without: "Premature abstractions grow into complex, over-engineered utilities that don't quite fit any caller. They become the technical debt that nobody dares touch."
+    bad: |
+      // After the FIRST occurrence, immediately extract a utility:
+      function formatEntity(entity, fields, transformer) {
+        return fields.reduce((acc, f) => ({
+          ...acc, [f]: transformer ? transformer(entity[f]) : entity[f]
+        }), {})
+      }
+      // Now every caller must understand this generic API for what was a simple rename.
+    good: |
+      // 1st time: inline it
+      const user = { name: raw.name.trim(), email: raw.email.toLowerCase() }
+
+      // 2nd time: still inline, slightly different shape — wait
+      const org = { name: raw.orgName.trim(), domain: raw.domain.toLowerCase() }
+
+      // 3rd time: NOW you can see the real pattern and extract something meaningful
+      function normalizeEntity(raw, mapping) { ... }
+
+  - name: "File Size Limits"
+    summary: "Functions under 30 lines, files under 200. Beyond that, split — not refactor for style."
+    what: "A hard limit: functions stay under ~30 lines, files stay under ~200. When you hit the limit, you split — not reformat or compress."
+    why: "Size is a forcing function for good design. A function that doesn't fit on one screen is doing too much. A file with 500 lines has too many responsibilities."
+    without: "1000-line files become black boxes. Nobody reads the whole thing before editing. Bugs hide in the middle. Merges become war zones."
+    bad: |
+      // auth.ts — 850 lines
+      // contains: login, logout, token refresh, password reset,
+      // email verification, session management, OAuth, rate limiting
+      export function login() { /* 120 lines */ }
+      export function refreshToken() { /* 80 lines */ }
+      export function resetPassword() { /* 95 lines */ }
+      // ... 500 more lines
+    good: |
+      // auth/login.ts       — 60 lines
+      // auth/token.ts       — 55 lines
+      // auth/password.ts    — 70 lines
+      // auth/session.ts     — 45 lines
+      // auth/oauth.ts       — 80 lines
+      // auth/index.ts       — re-exports public API, 15 lines
+
+  - name: "Minimal Public Interface"
+    summary: "Each module exposes only what others need. Implementation details stay private."
+    what: "Every module has an explicit public API — the things it intentionally exposes. Everything else is internal and not accessible from outside."
+    why: "A narrow public interface means external code has fewer ways to depend on your internals. You can change implementation freely without breaking callers."
+    without: "Internal helpers get called from 20 places. A cleanup refactor requires auditing the entire codebase. Modules become tightly coupled through accidental dependencies."
+    bad: |
+      // payments.ts — exports everything
+      export function processPayment() { ... }
+      export function validateCard() { ... }      // internal detail
+      export function buildStripePayload() { ... } // internal detail
+      export function parseWebhookEvent() { ... }  // internal detail
+      export function retryFailedCharge() { ... }  // internal detail
+    good: |
+      // payments.ts — exports only the contract
+      export function processPayment(order) { ... }
+      export function handleWebhook(event) { ... }
+
+      // everything else is internal:
+      function validateCard() { ... }
+      function buildStripePayload() { ... }
+      function retryFailedCharge() { ... }

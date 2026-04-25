@@ -1,0 +1,141 @@
+id: web-deploy
+order: 90
+name: "Pre-Launch"
+description: "Execute a final production checklist for SEO, performance, accessibility, and security."
+category: SVILUPPO
+level: [beginner, experienced]
+platform: [web]
+language: [all]
+tags: [deploy, production, seo, performance, accessibility, security, checklist]
+use_with: [core-quality, core-workflow]
+principles:
+  - name: "Production Config"
+    summary: "All env vars point to production. No localhost URLs, test API keys, or dev databases."
+    what: "Before deploying, every environment variable is verified to point to production systems. No localhost references, test API keys, staging database URLs, or debug flags active."
+    why: "Development configuration leaks happen at launch more than at any other time. A dev database URL in production means real user data hits the wrong system — or no system at all."
+    without: "App launches with NEXT_PUBLIC_API_URL=http://localhost:3000. Every API call silently fails in production. The homepage loads but nothing works. Users see blank screens."
+    bad: |
+      # .env.production (not reviewed before deploy)
+      NEXT_PUBLIC_API_URL=http://localhost:3000
+      STRIPE_SECRET_KEY=sk_test_abc123
+      DATABASE_URL=postgres://localhost:5432/myapp_dev
+      DEBUG=true
+    good: |
+      # .env.production (verified pre-launch)
+      NEXT_PUBLIC_API_URL=https://api.myapp.com
+      STRIPE_SECRET_KEY=sk_live_xyz789
+      DATABASE_URL=postgres://prod-db.myapp.com:5432/myapp
+      DEBUG=false
+
+      # Pre-launch checklist step:
+      # grep -r "localhost" .env.production → must return empty
+
+  - name: "Error Coverage"
+    summary: "Custom 404 and 500 pages exist. No stack traces exposed to users. External API failures are handled gracefully."
+    what: "Custom error pages (404, 500) are in place. Server errors return user-friendly messages, never stack traces. External API failures have fallback behavior — loading states or retry options."
+    why: "Default framework error pages expose implementation details (framework version, file paths) that attackers use. Stack traces in production are both a UX failure and a security vulnerability."
+    without: "An external API times out. The app renders a full Node.js stack trace — including the API key in the request URL — visible to any user who hits that page."
+    bad: |
+      Error: Cannot read properties of undefined (reading 'data')
+          at processPayment (file:///app/src/payments.js:47:23)
+          at async POST /api/checkout (file:///app/src/routes/checkout.js:12:5)
+      /* Stack trace exposed to user. File paths visible. Line numbers visible. */
+    good: |
+      // app/not-found.tsx
+      export default function NotFound() {
+        return <ErrorPage title="Page not found" action="Go back home" href="/" />
+      }
+
+      // app/error.tsx
+      export default function Error({ reset }) {
+        return <ErrorPage title="Something went wrong" action="Try again" onClick={reset} />
+      }
+      /* User sees a helpful page. Stack trace goes to logs only. */
+
+  - name: "Performance Baseline"
+    summary: "Lighthouse ≥80 on mobile. Images under 200KB. Main JS bundle under 200KB gzip."
+    what: "Before launch: run Lighthouse on mobile and confirm a score ≥80. Check that no uncompressed image exceeds 200KB. Verify the main JavaScript bundle is under 200KB gzip."
+    why: "53% of mobile users abandon a page that takes more than 3 seconds to load. These three checks catch the most common performance regressions before they affect real users."
+    without: "A 4MB uncompressed hero image, a 1.2MB unminified JS bundle, and a Lighthouse score of 41. Users on mobile leave before the page finishes loading. SEO rankings drop."
+    bad: |
+      # Pre-launch audit reveals:
+      hero.png: 4.2MB (uncompressed)
+      main.js: 1.1MB gzip
+      Lighthouse mobile score: 38
+      LCP (Largest Contentful Paint): 8.4s on 4G
+
+      # Result: 65% bounce rate on mobile at launch.
+    good: |
+      # Pre-launch audit:
+      hero.webp: 87KB (compressed, modern format)
+      main.js: 142KB gzip (tree-shaken, code-split)
+      Lighthouse mobile score: 91
+      LCP: 1.8s on 4G
+
+      # Commands:
+      npx next build && npx next-bundle-analyzer  # check bundle
+      npx lighthouse https://staging.myapp.com --emulated-form-factor=mobile
+
+  - name: "Real Device Testing"
+    summary: "Tested on a physical device, not just browser DevTools. Portrait and landscape."
+    what: "At least one complete walkthrough of the critical user journey on a real phone — not Chrome DevTools mobile emulation — in both portrait and landscape orientation."
+    why: "DevTools emulation doesn't replicate touch accuracy, font rendering, network conditions, or viewport quirks of real hardware. Bugs invisible in the browser appear immediately on device."
+    without: "Layout looks perfect in DevTools. On a real iPhone, the fixed footer overlaps the bottom navigation bar. A tap target is 8px — impossible to hit with a thumb. Only visible on device."
+    bad: |
+      Developer: "Tested on mobile."
+      [Tested using Chrome DevTools device emulation at 375px width]
+      Launch day:
+      - Fixed bottom bar overlaps iPhone safe area
+      - Form inputs zoom to 110% on focus (font-size < 16px)
+      - Tap targets on nav are 24px (minimum should be 44px)
+      - Landscape mode breaks the checkout layout
+    good: |
+      Pre-launch checklist:
+      ✅ Tested on real iPhone 14 (Safari) — portrait and landscape
+      ✅ Tested on real Android (Chrome) — portrait and landscape
+      ✅ All tap targets ≥ 44×44px
+      ✅ No zoom on input focus (font-size ≥ 16px on all inputs)
+      ✅ Safe area insets handled (env(safe-area-inset-bottom))
+      ✅ Checkout flow completed successfully end-to-end on device
+
+  - name: "SEO Minimum"
+    summary: "Unique title and meta description per page. Images have alt text. sitemap.xml exists."
+    what: "Every page has a unique, descriptive <title> tag and a unique meta description. All content images have meaningful alt text. sitemap.xml is generated and submitted to Google Search Console."
+    why: "These three items account for the majority of basic SEO impact. A missing sitemap means pages may not be indexed. Missing meta descriptions mean Google writes them for you — usually worse."
+    without: "Every page has the same title: 'My App'. Google indexes all pages as duplicates. The sitemap was never generated. Three months post-launch, the app has no organic traffic."
+    bad: |
+      <title>My App</title>  <!-- same on every page -->
+      <meta name="description" content="My App">  <!-- generic, same on every page -->
+      <img src="product.jpg">  <!-- no alt -->
+      <!-- no sitemap.xml -->
+      <!-- no robots.txt -->
+    good: |
+      <!-- /pricing page -->
+      <title>Pricing — Simple plans for every team | MyApp</title>
+      <meta name="description" content="MyApp pricing starts at $9/month. Free 14-day trial, no credit card required.">
+      <img src="product.jpg" alt="MyApp dashboard showing real-time analytics">
+      <!-- sitemap.xml generated by next-sitemap, submitted to Search Console -->
+
+  - name: "Security Headers"
+    summary: "X-Frame-Options, Content-Security-Policy, and X-Content-Type-Options are set. npm audit is clean."
+    what: "HTTP security headers are configured on the server or CDN: X-Frame-Options (blocks clickjacking), Content-Security-Policy (limits script sources), X-Content-Type-Options (prevents MIME sniffing). npm audit shows no high/critical vulnerabilities."
+    why: "Security headers are free protection. They prevent entire classes of attacks (XSS via injected scripts, clickjacking, MIME type confusion) with zero performance cost."
+    without: "No Content-Security-Policy. An injected ad script loads an external payload. Users' session tokens are exfiltrated. The attack vector was a missing HTTP header that takes 2 minutes to add."
+    bad: |
+      # curl -I https://myapp.com
+      HTTP/2 200
+      content-type: text/html
+      # No security headers. Site scores F on securityheaders.com.
+      # Vulnerable to: clickjacking, XSS via injected scripts, MIME sniffing.
+    good: |
+      # next.config.js
+      headers: [{ source: '/(.*)', headers: [
+        { key: 'X-Frame-Options', value: 'DENY' },
+        { key: 'X-Content-Type-Options', value: 'nosniff' },
+        { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+        { key: 'Content-Security-Policy', value: "default-src 'self'; script-src 'self' 'nonce-{NONCE}'" },
+      ]}]
+
+      # Pre-launch:
+      npm audit --audit-level=high  # must return 0 vulnerabilities
+      # Check: https://securityheaders.com → target score: A or A+

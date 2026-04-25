@@ -1,0 +1,50 @@
+id: web-ux-ui
+order: 80
+name: "Web Component Implementation"
+description: "Professional web interface patterns using Tailwind, accessible primitives, and consistent layout systems."
+category: SVILUPPO
+level: [beginner, experienced]
+platform: [web]
+language: [javascript, typescript]
+tags: [ui, components, react, tailwind, shadcn, forms, layout]
+sub_skills:
+  - design-system
+  - ui-styling
+  - forms
+  - layouts
+use_with: [web-design-tokens, core-ux]
+principles:
+  - name: "Pattern-Driven Components"
+    summary: "Build components from a single source of truth for each pattern (Input, Button, Modal)."
+    what: "Every component follows a project-wide pattern for states (hover, focus, loading, error). Do not reinvent component logic; use the established library (e.g., shadcn/ui)."
+    why: "Ensures users don't have to 're-learn' how a button or a form field works as they move between different pages."
+    bad: "Implementing a custom modal that handles the 'Escape' key differently than other modals on the site."
+    good: "Extending a base Modal component that inherits global keyboard and focus management."
+
+  - name: "Utility-First with Tokens"
+    summary: "Use Tailwind utilities but only those mapped to the design token system."
+    what: "Implementation uses utility classes (e.g., bg-primary, p-card-p) that reference the framework's semantic tokens. Avoid 'magic' numbers in classes."
+    why: "Combines the speed of utility classes with the long-term maintainability of a design system."
+    bad: "className='p-[31px] text-[#3b82f6]' (Hardcoded values bypass the system)."
+    good: "className='p-card-p text-primary' (Inherits values from centralized tokens)."
+
+  - name: "Accessible Primitives"
+    summary: "Use headless primitives (Radix, Headless UI) for complex interactive elements."
+    what: "Complex components like Dropdowns, Dialogs, and Selects are built on top of accessible primitives that handle focus traps, keyboard navigation, and ARIA roles."
+    why: "Building accessible interactive components from scratch is error-prone and time-consuming."
+    bad: "A <div> based dropdown that is not reachable via Tab key or screen readers."
+    good: "A dropdown built on Radix UI that supports keyboard arrows, Escape key, and proper ARIA states."
+
+  - name: "Declarative UI States"
+    summary: "Loading, Error, and Empty states are explicit parts of the component architecture."
+    what: "Every data-fetching or action-oriented component must handle and display loading, error, and empty states. These states are not afterthoughts."
+    why: "Prevents UI 'dead ends' where the user doesn't know why a list is empty or why a button didn't work."
+    bad: "A list that just shows a blank white space while loading data."
+    good: "A list that shows a skeleton loader while fetching, and a friendly 'No items found' message if empty."
+
+  - name: "Responsive Layout Patterns"
+    summary: "Use standard grid and flex patterns for consistent page architecture."
+    what: "Pages and sections use a unified grid system and spacing tokens to maintain vertical and horizontal rhythm across the site."
+    why: "Alignment and spacing are the primary indicators of visual quality."
+    bad: "A 2-column grid on the home page with a 24px gap, and a 2-column grid on the search page with a 30px gap."
+    good: "All grids using 'gap-grid-gap' from the centralized spacing tokens."

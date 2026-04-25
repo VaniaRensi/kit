@@ -1,0 +1,31 @@
+id: core-historification
+order: 25
+name: "Historification & Decisions"
+description: "Document high-signal architectural choices and maintain snapshots of stable states."
+category: core
+level: [beginner, experienced]
+platform: [all]
+language: [all]
+tags: [history, decisions, adr, backup, snapshots]
+use_with: [core-workflow]
+principles:
+  - name: "The Decision Log (ADR)"
+    summary: "Record the 'why' behind major pivots or structural choices in HISTORIFICATION.md."
+    what: "Document major architectural decisions (Architectural Decision Records). Include the problem, alternatives considered, and the final decision with its rationale."
+    why: "Prevents circular discussions and ensures that future developers (or AI sessions) understand the constraints that led to a choice."
+    bad: "Changing a core library or pattern without documenting the reason, leading to its reversal later."
+    good: "Logging exactly why a specific technology was chosen and why others were rejected."
+
+  - name: "Stability Snapshots"
+    summary: "Capture the file state of 'perfect' UI or logic milestones for visual insurance."
+    what: "When a complex feature or style reaches a high-quality stable state, copy the relevant files to a dedicated snapshots directory."
+    why: "Provides a fail-safe restoration point for 'visual' or 'feeling' based milestones that Git history alone might be slow to recover."
+    bad: "Losing a perfect CSS configuration during a later experiment because there was no snapshot."
+    good: "Creating a snapshot folder before starting a risky design pivot."
+
+  - name: "User-Led Documentation"
+    summary: "Snapshots and decision logs are created only upon user command or explicit approval."
+    what: "The AI does not populate logs or take snapshots automatically. These are high-value actions reserved for major milestones and require user initiative."
+    why: "Ensures the log remains high-signal and reflects what the user considers a significant milestone."
+    bad: "Recording an entry for every minor bug fix or small style tweak."
+    good: "Waiting for the user to say 'Log this change' or suggesting it only for major structural shifts."

@@ -1,0 +1,153 @@
+id: core-documentation
+order: 60
+name: "Documentation"
+description: 'Write clear READMEs, ADLs, and why-not-what comments for long-term maintainability.'
+category: CONTENUTI
+level: [beginner, experienced]
+platform: [all]
+language: [all]
+tags: [documentation, readme, comments, api-docs, decisions]
+use_with: [core-handoff, core-architecture]
+principles:
+  - name: "Why, Not What"
+    summary: "Comments explain intent and constraints, not the code itself. If the code is clear, the comment is noise."
+    what: "A comment's only job is to explain why — a non-obvious constraint, a workaround for a specific bug, a business rule that can't be inferred from the code. Never explain what the code does."
+    why: "Well-named code already explains what it does. A comment restating the code adds maintenance burden: the comment drifts out of sync, creating contradictions and confusion."
+    without: "// Increment counter by 1 above counter++. The comment is noise. Worse: the code later changes to counter += 2 and the comment is never updated. Now it actively misleads."
+    bad: |
+      // Get the user from the database
+      const user = await getUserById(id)
+
+      // Check if the user exists
+      if (!user) return null
+
+      // Return the user
+      return user
+    good: |
+      const user = await getUserById(id)
+      if (!user) return null
+      return user
+      // No comments needed — the code is self-explanatory.
+
+      // When a comment IS needed (explaining why, not what):
+      // Stripe requires idempotency keys on retries to prevent double charges.
+      // The key is built from orderId + attemptNumber to make it deterministic.
+      const idempotencyKey = `${orderId}-${attemptNumber}`
+
+  - name: "README Structure"
+    summary: "Every project has a README: what it does, prerequisites, setup commands, structure, how to contribute."
+    what: "Every repository has a README with five sections: what the project does, prerequisites to run it, setup commands, project structure, and how to contribute."
+    why: "The README is the front door. A new developer, a new AI session, or your future self can go from zero to running in minutes — or spend hours guessing."
+    without: "A repository with no README. A new team member clones it. No setup instructions. They try three different commands, break the database, and spend half a day asking questions."
+    bad: |
+      # My App
+
+      This is my app. It does things.
+
+      ## License
+      MIT
+    good: |
+      # Billing Service
+
+      Handles subscription billing via Stripe. Part of the payments domain.
+
+      ## Prerequisites
+      Node 20+, PostgreSQL 15+, a Stripe account (test mode for dev)
+
+      ## Setup
+      cp .env.example .env   # fill in values
+      pnpm install
+      pnpm db:migrate
+      pnpm dev               # http://localhost:3000
+
+      ## Structure
+      src/
+        routes/     HTTP handlers
+        services/   Business logic
+        db/         Queries and migrations
+
+      ## Contributing
+      Branch from main. PR against main. Tests required for new endpoints.
+
+  - name: "Document Public Interfaces"
+    summary: "Every exported function documents its inputs, return value, and failure conditions. Private functions don't need it."
+    what: "Every exported function, class, or API endpoint has documentation covering: what it expects as input, what it returns, and what it does when it fails or receives invalid input."
+    why: "The public interface is the contract with other code. Without documentation, callers must read the implementation to understand the contract — defeating the purpose of encapsulation."
+    without: "A shared utility function with no docs. A caller passes null without realizing it throws. The error surfaces two layers up with no useful message. The bug takes an hour to trace."
+    bad: |
+      export function processPayment(order, options) {
+        // 80 lines of implementation
+        // Caller has no idea what 'options' accepts,
+        // what the return value shape is,
+        // or what exceptions to expect.
+      }
+    good: |
+      /**
+       * Charges the customer for an order via Stripe.
+       * @param order - Must have order.customerId and order.totalCents
+       * @param options.idempotencyKey - Optional. Prevents double charges on retry.
+       * @returns PaymentResult with { chargeId, status, receiptUrl }
+       * @throws PaymentDeclinedError if card is declined
+       * @throws InvalidOrderError if order.totalCents <= 0
+       */
+      export function processPayment(order, options = {}) { ... }
+
+  - name: "Proximity Principle"
+    summary: "Documentation lives next to the code it describes. External wikis go stale. Inline comments don't."
+    what: "Documentation belongs in the same file — or same folder — as the code it describes. External wikis, Notion pages, and Confluence docs are secondary at best."
+    why: "Documentation that lives away from code drifts out of sync. Documentation that lives next to code gets updated (or deleted) when the code changes. Proximity enforces freshness."
+    without: "A Confluence page documents an API that was refactored 8 months ago. New developers read the Confluence page, write code against the old API, and spend hours debugging why nothing works."
+    bad: |
+      Confluence: "Payment API — POST /api/payments, accepts { amount, currency, card_token }"
+      [8 months later]
+      Code: POST /api/payments now accepts { orderId, paymentMethodId }
+      Confluence: still shows the old format.
+      New dev: writes code against the old format. 2 hours debugging.
+    good: |
+      // src/routes/payments.ts
+      /**
+       * POST /api/payments
+       * Body: { orderId: string, paymentMethodId: string }
+       * Returns: { chargeId: string, status: 'succeeded' | 'failed' }
+       */
+      router.post('/payments', handlePayment)
+      // Doc lives with the code. When the route changes, the doc is right there.
+
+  - name: "Decision Log"
+    summary: "Key architectural choices are recorded with context and alternatives considered — not just what was decided."
+    what: "When a significant architectural decision is made — choosing a library, a pattern, a trade-off — it is recorded with: the decision, the alternatives considered, and the reason for the choice."
+    why: "Code shows what was built. A decision log explains why the other options were rejected. Without it, future developers undo deliberate choices, not knowing they were already evaluated."
+    without: "Team switches from Prisma to raw SQL 'because Prisma is complex'. The original choice was made for a specific type-safety reason that gets lost. Six months later, the complexity returns, this time unmanaged."
+    bad: |
+      # No log. Just code using Zod for validation.
+      # New developer joins. Thinks Yup is better. Proposes switching.
+      # Original team: "We tried Yup. It had a specific problem with our nested schemas."
+      # Nobody wrote it down. 3 hours of discussion to rediscover the same answer.
+    good: |
+      ## DECISIONS.md
+
+      ### Validation: Zod over Yup (2025-02-14)
+      Chose Zod for runtime validation.
+      Evaluated: Yup, Joi, Zod.
+      Rejected Yup: infer() type inference breaks with our nested discriminated unions.
+      Rejected Joi: no TypeScript-first API.
+      Revisit: only if Zod drops TypeScript support.
+
+  - name: "No Dead Comments"
+    summary: "Commented-out code, TODO without an owner, and outdated docs get removed. Git history preserves the past."
+    what: "Commented-out code is deleted, not preserved. TODOs without a name and a date are removed. Documentation that no longer matches the code is updated or removed."
+    why: "Dead comments create ambiguity: is this code disabled intentionally? Is this TODO still valid? Git history preserves everything. The working tree should only show what is current."
+    without: "// TODO: fix this someday in a critical payment function. Is it fixed? Is it still broken? Who owns it? Nobody knows. It has been there for three years and nobody touches it."
+    bad: |
+      // TODO: fix this
+      // const oldValidation = validateLegacy(input)
+      // if (oldValidation.errors) return null
+      const result = validate(input)
+
+      // TODO: add retry logic here someday
+      return await charge(result)
+    good: |
+      const result = validate(input)
+      return await charge(result)
+      // Old validation removed 2025-03-10 (replaced by Zod schema, see PR #142)
+      // Retry logic: tracked in issue #198, assigned to @sara, due next sprint.

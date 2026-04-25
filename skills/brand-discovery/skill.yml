@@ -1,0 +1,46 @@
+id: brand-discovery
+order: 10
+name: "Brand Discovery"
+description: 'Define visual identity, restricted palettes, and strategic typography as a source of truth.'
+category: STRATEGIA
+level: [beginner, experienced]
+platform: [web, mobile]
+language: [all]
+tags: [brand, design, strategy, color, typography, palette]
+note: "Skip for purely backend projects. The brief drives all downstream token generation."
+use_with: [web-design-tokens, web-ux-ui]
+principles:
+  - name: "Brief Before Code"
+    summary: "Establish the brand identity in BRAND-BRIEF.md before writing any styles or components."
+    what: "The brand brief documents the goal, audience, mood, and visual constraints. All design tokens are derived from this brief to ensure implementation matches intent."
+    why: "Prevents design drift and rework. Starting with a brief ensures every visual decision is strategic, not accidental."
+    bad: "Picking colors on the fly while building components, leading to a fragmented brand."
+    good: "Defining the primary blue and heading font in the brief first, then generating all tokens from those values."
+
+  - name: "Restricted Palette Strategy"
+    summary: "Limit the core identity to 3–4 base colors. Elegance comes from restriction, not abundance."
+    what: "Select a maximum of three core colors (Primary, Secondary, Accent) plus a Neutral role. Do not add new colors for specific features; use shades and transparencies of the existing palette."
+    why: "A restricted palette prevents the 'circus effect' where too many colors compete for attention. It creates a professional, harmonious, and sophisticated visual language."
+    bad: "Adding a new purple for the 'Features' section and a different orange for 'Pricing' when those colors aren't in the brand palette."
+    good: "Using a 10% transparency of the Primary color for section backgrounds and a 50% shade of the Neutral color for borders."
+
+  - name: "Perceptual Shade Intent"
+    summary: "Define how colors will vary (shades and alpha) before generating the token system."
+    what: "For each base color, define the intent for its scale: which shades will be used for subtle backgrounds, which for hover states, and which for high-contrast text."
+    why: "Allows the design system to handle all UI states (active, disabled, subtle, bold) while remaining strictly within the brand's harmonious color space."
+    bad: "Guessing hex values for a 'lighter blue' in the middle of development."
+    good: "Specifying in the brief that 'Primary-100' (10% lightness) will be the standard subtle background across the app."
+
+  - name: "Proactive Inquiry"
+    summary: "Don't settle for short answers. Dig for the 'Why' and the 'Feeling' until the vision is clear."
+    what: "If the user provides brief or technical-only answers, the agent must ask high-context follow-up questions to uncover the emotional goal and target persona. Do not move to colors or fonts until the soul of the brand is documented."
+    why: "Developers often give 'short' answers that lack design intent. Without proactive inquiry, the AI 'guesses' the style, leading to generic results that don't satisfy the user's actual (unspoken) expectations."
+    bad: "User: 'It's a cleaning app.' AI: 'Okay, I suggest blue and white for a sterile look.'"
+    good: "User: 'It's a cleaning app.' AI: 'To help me choose the right style, tell me more: Who is using this? Is it for a busy professional who needs speed, or someone who wants to feel zen and calm while cleaning? How should they feel the moment they open the app?'"
+
+  - name: "Audience-Driven Design"
+    summary: "Visual choices must be justified by the target user profile and industry context."
+    what: "Every choice—color temperature, type density, and tone—must serve the audience's needs and expectations, not the personal taste of the developer or designer."
+    why: "Design is a communication tool. Success is measured by how well the intended audience understands and trusts the interface."
+    bad: "Using a dark-mode-only minimal design for an enterprise HR tool used by professionals in bright offices."
+    good: "Choosing a high-contrast, data-dense layout for a dashboard aimed at financial analysts."

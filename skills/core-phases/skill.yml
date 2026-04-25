@@ -1,0 +1,31 @@
+id: core-phase-transition
+order: 100
+name: "Phase & Agent Transition"
+description: "Manage the transition between different specialized AI agents and project phases."
+category: AGNOSTICO
+level: [experienced]
+platform: [all]
+language: [all]
+tags: [phase-transition, workflow, multi-agent, strategy, relay]
+use_with: [core-workflow, core-historification]
+principles:
+  - name: "State Snapshot"
+    summary: "Every handoff must begin with a full dump of the project's Environment Configuration."
+    what: "Include the PROJECT_ID, STACK, PLATFORM, and UX_STRATEGY from the status file. This ensures the new agent inherits the project's 'Brain' instantly."
+    why: "Without the state snapshot, the new agent will guess the stack or propose conflicting architectures."
+    bad: "Sending the coder a request to 'build the cards' without telling them it's a Next.js/Tailwind v4 project."
+    good: "Starting the handoff with: 'PROJECT_ID: CLEAN | STACK: Next.js + Tailwind v4 | Current Stage: Implementation'."
+
+  - name: "Persona Alignment"
+    summary: "Explicitly assign a specialized role to the next agent."
+    what: "Define the next agent's boundaries: 'You are the Coder. Focus on JSX and logic. The Branding is stable—do not modify it.'"
+    why: "Prevents 'Agent Drift' where a coder tries to re-design the brand or an architect tries to write low-level code."
+    bad: "Letting the coder agent decide to change the primary blue because they think it looks better."
+    good: "Instructing the coder: 'Your source of truth for colors is CLEAN-BRAND.md. Do not deviate.'"
+
+  - name: "The Bridge Prompt"
+    summary: "Generate a copy-pasteable prompt that links the project files and required skills."
+    what: "Produce a single message containing: 1. Current Status. 2. Next Milestone. 3. List of skill files to load."
+    why: "Reduces friction for the user and ensures the new agent doesn't miss critical instructions."
+    bad: "Telling the user to 'just tell the next agent what we did'."
+    good: "Generating a 'Handoff Package' that the user can paste with one click."
