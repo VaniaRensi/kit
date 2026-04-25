@@ -20,8 +20,9 @@ You must identify which **Specialization Category** the current task belongs to.
 3.  **Resumption Protocol**:
     - Read the **Status file** to identify the `CURRENT_PHASE` and milestone.
     - Read the last 3 entries in the **History file** (`[ID]-HISTORY.md`).
-    - **Initialization Statement**: Every major response MUST start with:
+    - **MANDATORY Initialization Statement**: Every major response (especially the first one) MUST start with this exact block:
       > "Sto utilizzando le skill: `[lista-skill]`. Fase: `[FASE]`. Categoria: `[CATEGORIA]`. Riferimento Design: `[Stato Brand/UX]`."
+    - **DO NOT proceed with work** until this statement is generated. This is your "Zero-Step" verification.
 4.  **Load Master Process**: Load **`kit/skills/core-workflow/INSTRUCTIONS.md`**.
 
 ## ⚙️ Operative Rules (Always Active)
