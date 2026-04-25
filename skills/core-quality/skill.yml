@@ -16,9 +16,9 @@ principles:
     why: "Git history is permanent. A secret committed even once and immediately removed is still in the history. Repositories get exposed; hardcoded credentials get stolen."
     without: "One public GitHub push exposes your production database. Attackers scan GitHub continuously for leaked credentials. The blast radius is immediate and irreversible."
     bad: |
-      const stripe = new Stripe('sk_live_4eC39HqLyjWDarjtT1zdp7dc')
-      const db = postgres('postgres://admin:mypassword@prod-db.example.com/app')
-      const jwt = sign(payload, 'my-super-secret-key-123')
+      const stripe = new Stripe('sk_live_PLACEHOLDER_KEY_DO_NOT_COMMIT')
+      const db = postgres('postgres://admin:PLACEHOLDER_PASSWORD@prod-db.example.com/app')
+      const jwt = sign(payload, 'PLACEHOLDER_SECRET_KEY')
     good: |
       // .env (never committed)
       // STRIPE_SECRET_KEY=sk_live_...
