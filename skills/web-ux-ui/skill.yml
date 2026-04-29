@@ -18,40 +18,94 @@ principles:
     summary: "Build components from a single source of truth for each pattern (Input, Button, Modal)."
     what: "Every component follows a project-wide pattern for states (hover, focus, loading, error). Do not reinvent component logic; use the established library (e.g., shadcn/ui)."
     why: "Ensures users don't have to 're-learn' how a button or a form field works as they move between different pages."
-    bad: "Implementing a custom modal that handles the 'Escape' key differently than other modals on the site."
-    good: "Extending a base Modal component that inherits global keyboard and focus management."
+    bad: |
+      <button 
+        style={{ background: 'blue', borderRadius: '5px' }}
+        onClick={() => setOpen(true)}
+      >
+        Open Modal
+      </button>
+    good: |
+      import { Button } from "@/components/ui/button";
+      import { Modal } from "@/components/ui/modal";
+
+      <Button variant="primary" onClick={openModal}>
+        Open Modal
+      </Button>
 
   - name: "Utility-First with Tokens"
     summary: "Use Tailwind utilities but only those mapped to the design token system."
     what: "Implementation uses utility classes (e.g., bg-primary, p-card-p) that reference the framework's semantic tokens. Avoid 'magic' numbers in classes."
     why: "Combines the speed of utility classes with the long-term maintainability of a design system."
-    bad: "className='p-[31px] text-[#3b82f6]' (Hardcoded values bypass the system)."
-    good: "className='p-card-p text-primary' (Inherits values from centralized tokens)."
+    bad: |
+      <div className="p-[31px] bg-[#1a1a1a] border border-[#ffffff10]">
+        <h2 className="text-[2.4rem] text-red-500">Alert</h2>
+      </div>
+    good: |
+      <div className="p-card-p bg-surface border border-white/10">
+        <h2 className="text-heading-lg text-primary">Alert</h2>
+      </div>
 
   - name: "Accessible Primitives"
     summary: "Use headless primitives (Radix, Headless UI) for complex interactive elements."
     what: "Complex components like Dropdowns, Dialogs, and Selects are built on top of accessible primitives that handle focus traps, keyboard navigation, and ARIA roles."
     why: "Building accessible interactive components from scratch is error-prone and time-consuming."
-    bad: "A <div> based dropdown that is not reachable via Tab key or screen readers."
-    good: "A dropdown built on Radix UI that supports keyboard arrows, Escape key, and proper ARIA states."
+    bad: |
+      <div className="dropdown" onClick={() => setOpen(!open)}>
+        <span>Select Option</span>
+        {open && <ul><li>Option 1</li></ul>}
+      </div>
+    good: |
+      import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>Select Option</DropdownMenu.Trigger>
+        <DropdownMenu.Content>...</DropdownMenu.Content>
+      </DropdownMenu.Root>
 
   - name: "Declarative UI States"
     summary: "Loading, Error, and Empty states are explicit parts of the component architecture."
     what: "Every data-fetching or action-oriented component must handle and display loading, error, and empty states. These states are not afterthoughts."
     why: "Prevents UI 'dead ends' where the user doesn't know why a list is empty or why a button didn't work."
-    bad: "A list that just shows a blank white space while loading data."
-    good: "A list that shows a skeleton loader while fetching, and a friendly 'No items found' message if empty."
+    bad: |
+      if (items.length === 0) return null;
+      return <ul>{items.map(i => <li>{i}</li>)}</ul>;
+    good: |
+      if (isLoading) return <SkeletonList />;
+      if (error) return <ErrorMessage error={error} />;
+      if (items.length === 0) return <EmptyState />;
+      return <ul>{items.map(i => <ListItem item={i} />)}</ul>;
 
   - name: "Instant Feedback (Optimistic UI)"
     summary: "Don't make users wait for the server. Show the result immediately and sync in the background."
     what: "Implement optimistic updates for actions like creating, deleting, or toggling items. The UI should reflect the change instantly before the server confirms."
     why: "Server latency (especially on free plans) kills the user experience. Optimistic UI makes the app feel native and fast."
-    bad: "A button that stays disabled for 2 seconds while the server processes the request."
-    good: "A task that appears in the list immediately, with a subtle 'syncing' indicator if necessary, while the server write happens in the background."
+    bad: |
+      async function handleToggle(id) {
+        setIsLoading(true);
+        await updateTodo(id); // Wait for server
+        fetchTodos(); // Refresh list
+        setIsLoading(false);
+      }
+    good: |
+      function handleToggle(id) {
+        // 1. Update UI immediately
+        setTodos(prev => prev.map(t => t.id === id ? { ...t, done: !t.done } : t));
+        // 2. Sync with server in background
+        updateTodo(id).catch(err => {
+          setTodos(prev); // Rollback on error
+        });
+      }
 
   - name: "Responsive Layout Patterns"
     summary: "Use standard grid and flex patterns for consistent page architecture."
     what: "Pages and sections use a unified grid system and spacing tokens to maintain vertical and horizontal rhythm across the site."
     why: "Alignment and spacing are the primary indicators of visual quality."
-    bad: "A 2-column grid on the home page with a 24px gap, and a 2-column grid on the search page with a 30px gap."
-    good: "All grids using 'gap-grid-gap' from the centralized spacing tokens."
+    bad: |
+      <div className="grid grid-cols-2 gap-[24px] lg:gap-[40px]">
+        {/* Custom breakpoints and magic numbers everywhere */}
+      </div>
+    good: |
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-grid-gap">
+        {/* Uses consistent responsive tokens */}
+      </div>
