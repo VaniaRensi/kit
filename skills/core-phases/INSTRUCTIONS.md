@@ -13,6 +13,7 @@ When the user says "Ready for the next phase" or when a phase transition occurs,
 
 **1. Project State**
 - **ID**: `[PROJECT_ID]`
+- **Mode**: `[OPERATION_MODE]`
 - **Current Phase**: `[e.g., PHASE 1: FOUNDATION]`
 - **Target Phase**: `[e.g., PHASE 2: BUILD]`
 - **Work Category**: `[e.g., DEVELOPMENT]`

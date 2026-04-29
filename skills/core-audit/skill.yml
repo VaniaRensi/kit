@@ -1,0 +1,14 @@
+name: core-audit
+version: 1.0.0
+description: Systematic analysis of an existing codebase.
+category: quality
+dependencies:
+  - core-workflow
+  - core-naming
+  - core-architecture
+outputs:
+  - AUDIT-MAP.md
+  - AUDIT-FLOW.md
+  - AUDIT-QUALITY.md
+  - AUDIT-SECURITY.md
+  - AUDIT-PLAN.md

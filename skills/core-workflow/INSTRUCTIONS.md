@@ -1,11 +1,21 @@
 ---
 name: workflow-ai
-description: Guides the complete development process of a project with AI. Use this skill at the start of every new project, or when the user says "let's start", "new project", "let's go", "modify this", "update this file". Manages kickoff, work phases, planned and improvised checkpoints, autonomous loops, and modifications to existing code. Contains the communication protocol between user and AI for the entire project lifecycle.
+description: Guides the complete project lifecycle using the 3-Mode Engine (BUILD, AUDIT, DOCUMENT). Manages kickoff, phase gates, and routing.
 ---
 
-# AI Workflow — The Golden Path Protocol
+# AI Workflow — The 3-Mode Engine
 
-This protocol governs the project lifecycle. It enforces a linear, structured progression (The Golden Path) to ensure quality and focus.
+This protocol governs the project lifecycle. It adapts its linear progression based on the selected `OPERATION_MODE`.
+
+---
+
+## 🗺️ Operation Modes
+
+You must operate within one of these three modes:
+
+1.  **🏗️ BUILD**: For new projects. Follows the standard **Golden Path (F0-F4)**.
+2.  **🔍 AUDIT**: For existing codebases. Focuses on **Phase 1 (Discovery)** and **Phase 3 (Audit)**. Produces the 5 Audit Reports.
+3.  **📚 DOCUMENT**: For generating project documentation. Jumps straight to **Phase 4 (Launch)** logic.
 
 ---
 
@@ -13,27 +23,28 @@ This protocol governs the project lifecycle. It enforces a linear, structured pr
 
 You must work within the boundaries of the `CURRENT_PHASE` defined in `[ID]-STATUS.md`:
 
-1. **PHASE 0: CONFIG**: Initial setup, project ID, stack selection. Git is a prerequisite — do NOT teach the user how to set it up.
-2. **PHASE 1: FOUNDATION (STRATEGY)**: Define the vision. Before generating any handoff for the build phase, you MUST verify the user is technically ready:
-   1. **Infrastructure Check**: "Have you already created the necessary accounts (Supabase, Vercel, Firebase)?"
-   2. **Environment Ready**: "Do you have access to your API keys and environment variables?"
-   3. **Asset Preparation**: Guide the user to verify accounts and databases while still in STRATEGY mode. This is cheaper and less frustrating than discovering missing assets mid-build.
+1.  **PHASE 0: CONFIG**: Setup and Initialization. Prerequisites: GitHub repo and API keys.
+2.  **PHASE 1: FOUNDATION (STRATEGY)**: 
+    - **BUILD mode**: Branding, UX, and Architecture.
+    - **AUDIT mode**: Mapping and Logic Flow analysis.
+3.  **PHASE 2: BUILD (DEVELOPMENT)**: 
+    - **BUILD mode**: Pure implementation of UI and logic.
+    - **AUDIT mode**: Optional "Refactor" phase after the audit plan is approved.
+4.  **PHASE 3: CONTROL (QUALITY)**: 
+    - **BUILD mode**: Standard checkpoint and security sweep.
+    - **AUDIT mode**: The core phase where the 5 Reports are generated.
+5.  **PHASE 4: LAUNCH (CONTENT)**: 
+    - **ALL modes**: SEO, User Documentation, and Final Handover.
 
-   **DO NOT proceed to Phase 2 (BUILD) until all assets are confirmed ready.**
-3. **PHASE 2: BUILD (DEVELOPMENT)**: Pure implementation of components, logic, and UI.
-4. **PHASE 3: CONTROL (QUALITY)**: Security audits, refactoring, and stability verification.
-5. **PHASE 4: LAUNCH (CONTENT)**: SEO, final copy, and user documentation.
-
-**🚨 Phase-Gate Protocol**: Every Milestone MUST end with a complete Audit (Checkpoint Summary Table) BEFORE the next Milestone can be planned. Never skip this step.
+**🚨 Phase-Gate Protocol**: Every Milestone MUST end with a complete Audit (Checkpoint Summary Table) BEFORE the next Milestone can be planned.
 
 ---
 
 ## 🚦 Phase Gates & Transition
 
-Before moving to a new phase, you MUST verify that the current phase's goals are met.
-
-- **Phase Gate Protocol**: If the user asks to start a task from a future phase while the current phase is incomplete, you MUST warn them:
-  > "Warning: we are still in `[CURRENT PHASE]`. Jumping to `[REQUESTED PHASE]` could cause technical or brand misalignment. Do you want to proceed anyway, or should we finish `[CURRENT GOAL]` first?"
+- **Mode Drift**: If a user asks to "build" while in "AUDIT" mode, you MUST suggest switching the `OPERATION_MODE` in the status file before proceeding.
+- **Phase Warning**: If jumping phases:
+  > "Warning: we are still in `[CURRENT PHASE]`. Jumping to `[REQUESTED PHASE]` could cause technical debt. Proceed?"
 
 ---
 
@@ -41,28 +52,31 @@ Before moving to a new phase, you MUST verify that the current phase's goals are
 
 Every task follows this loop:
 
-1. **Initialization Statement**: Start the response with:
-   > "Skills: `[skill-list]`. Phase: `[PHASE]`. Category: `[CATEGORY]`. Design: `[Brand/UX Status]`. App Lang: `[APP_LANG]`. Chat Lang: `[CHAT_LANG]`."
-2. **Confirm Goal**: State what is being developed in this milestone.
-3. **Autonomous Build**: Maximum 2 attempts to solve errors before asking the user.
-4. **Checkpoint**: Once stable, propose the quality/security review.
-5. **Commit**: Propose a structured commit message for the stable work.
+1.  **Initialization Statement**: Start EVERY response with:
+    > "Skills: `[skill-list]`. Mode: `[MODE]`. Phase: `[PHASE]`. Category: `[CATEGORY]`. Design: `[Status]`. App Lang: `[APP_LANG]`. Chat Lang: `[CHAT_LANG]`."
+2.  **Confirm Goal**: State the specific milestone being worked on.
+3.  **Checkpoint**: Once stable, run the `core-quality` or `core-audit` checks.
+4.  **Commit**: Propose a structured commit message.
 
 ---
 
-## ⚙️ Environment & Routing
+## ⚙️ Routing Logic
 
-Your behavior is driven by the variables in `[ID]-STATUS.md`.
+Your behavior is driven by `OPERATION_MODE` and `CURRENT_PHASE`:
 
-- **IF `CURRENT_PHASE == PHASE 1`**: Load `brand-discovery` or `core-architecture`.
-- **IF `CURRENT_PHASE == PHASE 2`**: Load `web-ux-ui`, `web-design-tokens`.
-- **IF `CURRENT_PHASE == PHASE 3`**: Load `core-quality`, `core-naming`.
-- **IF `CURRENT_PHASE == PHASE 4`**: Load `core-documentation`, `core-ux` (SEO).
+- **IF `MODE == BUILD`**:
+  - `F1` -> `brand-discovery`, `core-architecture`.
+  - `F2` -> `web-ux-ui`, `web-design-tokens`.
+  - `F3` -> `core-quality`.
+- **IF `MODE == AUDIT`**:
+  - `F1` -> `core-audit` (Map & Flow).
+  - `F3` -> `core-audit` (Quality, Security, Plan).
+- **IF `MODE == DOCUMENT`**:
+  - `F4` -> `core-documentation`, `core-ux` (SEO).
 
 ---
 
 ## 🏁 Session End (Mandatory)
 
-1. Update `[ID]-STATUS.md`: mark milestones as STABLE or IN PROGRESS.
-2. Update `CURRENT_PHASE` if a transition occurred.
-3. Add entry to `[ID]-HISTORY.md` summarizing logical decisions and pivots.
+1.  Update `[ID]-STATUS.md`: mark milestones and `CURRENT_PHASE`.
+2.  Add entry to `[ID]-HISTORY.md` summarizing logical decisions.

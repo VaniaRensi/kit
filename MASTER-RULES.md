@@ -17,14 +17,25 @@ You must identify which **Specialization Category** the current task belongs to.
 
 1. **Search for Project Status**: Look for a file ending in `-STATUS.md` (e.g., `CLN-STATUS.md`).
 2. **If missing**: Read **`kit/templates/PROJECT-STATUS-TEMPLATE.md`** and initialize.
-3. **Resumption Protocol**:
-   - Read the **Status file** to identify the `CURRENT_PHASE` and milestone.
+3. **The Zero-Step Interview (Prerequisites & Mode)**:
+   - **MANDATORY**: Before performing any work, you MUST verify the project's foundation.
+   - If the project is not initialized, ask:
+     > "🏗️ **Welcome to AI Kit V2.** Before we begin, I need to verify our foundations:
+     > 1. **Repository Ready?** (GitHub repo created and `git init` done?)
+     > 2. **Environment Ready?** (API keys/Env vars available?)
+     > 3. **Operation Mode?** Choose one:
+     >    - **🏗️ BUILD**: Start a new project from scratch.
+     >    - **🔍 AUDIT**: Analyze and improve an existing codebase.
+     >    - **📚 DOCUMENT**: Generate standalone documentation for a project."
+   - **DO NOT proceed** until the user confirms prerequisites and selects a mode.
+4. **Resumption Protocol**:
+   - Read the **Status file** to identify the `OPERATION_MODE`, `CURRENT_PHASE`, and milestone.
    - Read the last 3 entries in the **History file** (`[ID]-HISTORY.md`).
    - **MANDATORY Initialization Statement**: Every major response (especially the first one) MUST start with this exact block:
-     > "Skills: `[skill-list]`. Phase: `[PHASE]`. Category: `[CATEGORY]`. Design: `[Brand/UX Status]`. App Lang: `[APP_LANG]`. Chat Lang: `[CHAT_LANG]`."
+     > "Skills: `[skill-list]`. Mode: `[MODE]`. Phase: `[PHASE]`. Category: `[CATEGORY]`. Design: `[Brand Status]`. App Lang: `[APP_LANG]`. Chat Lang: `[CHAT_LANG]`."
    - **Language Check**: If `APP_LANGUAGE` or `AI_CHAT_LANGUAGE` are missing from the Status file, you MUST ask the user to clarify them before proceeding.
-   - **DO NOT proceed with work** until this statement is generated. This is your "Zero-Step" verification.
-4. **Load Master Process**: Load **`kit/skills/core-workflow/INSTRUCTIONS.md`**.
+   - **DO NOT proceed with work** until this statement is generated.
+5. **Load Master Process**: Load **`kit/skills/core-workflow/INSTRUCTIONS.md`**.
 
 ## ⚙️ Operative Rules (Always Active)
 
@@ -42,15 +53,17 @@ You must identify which **Specialization Category** the current task belongs to.
 
 ## 🗺️ On-Demand Routing (Situational)
 
-| Situation | Skill to Load | Category |
-|-----------|---------------|----------|
-| **"Start new project"** | `core-workflow` | CONFIG |
-| **"Define brand/identity"** | `brand-discovery` | STRATEGY |
-| **"Technical architecture"** | `core-architecture` | STRATEGY |
-| **"Start implementation"** | `web-ux-ui` | DEVELOPMENT |
-| **"Design system tokens"** | `web-design-tokens` | DEVELOPMENT |
-| **"Audit / Security check"** | `core-quality` | QUALITY |
-| **"Switch agents / Handoff"** | `core-phases` | AGNOSTIC |
+| Situation | Skill to Load | Category | Mode |
+|-----------|---------------|----------|------|
+| **"Start new project"** | `core-workflow` | CONFIG | BUILD |
+| **"Audit existing code"** | `core-audit` | QUALITY | AUDIT |
+| **"Write documentation"** | `core-documentation` | CONTENT | DOCUMENT |
+| **"Define brand/identity"** | `brand-discovery` | STRATEGY | ANY |
+| **"Technical architecture"** | `core-architecture` | STRATEGY | ANY |
+| **"Start implementation"** | `web-ux-ui` | DEVELOPMENT | BUILD |
+| **"Design system tokens"** | `web-design-tokens` | DEVELOPMENT | BUILD |
+| **"Audit / Security check"** | `core-quality` | QUALITY | ANY |
+| **"Switch agents / Handoff"** | `core-phases` | AGNOSTIC | ANY |
 
 - **🛡️ MILESTONE GATEKEEPER**: It is strictly FORBIDDEN to propose or start the next Milestone before executing and presenting the **Checkpoint Summary Table** (skill `core-quality`).
 - **🛑 COMMIT AUTHORIZATION**: Before executing any `git commit` or `git push` operation, you MUST explicitly ask: *"I have completed [task], may I proceed with the commit and push?"*. Never assume authorization, especially if the push triggers an automatic deploy.

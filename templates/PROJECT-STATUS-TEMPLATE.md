@@ -4,6 +4,7 @@
 > These variables drive the AI Skill Routing. Do not remove.
 
 - **PROJECT_ID**: [2-3 chars, e.g., CLN, HUB, KIT]
+- **OPERATION_MODE**: [BUILD | AUDIT | DOCUMENT]
 - **CURRENT_PHASE**: [PHASE 0 | PHASE 1 | PHASE 2 | PHASE 3 | PHASE 4]
 - **PLATFORM**: [web | mobile | backend | multi]
 - **STACK**: [nextjs-tailwind | react-native | python-fastapi | etc.]

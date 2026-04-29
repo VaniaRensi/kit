@@ -1,54 +1,56 @@
-# The Golden Path — Guide to Structured AI Workflow
+# The 3-Mode Engine — Guide to AI Kit V2
 
-This document explains the "engine" of the AI Kit Base and how to navigate projects using specialized agents and structured phases.
+This document explains the AI Kit Base V2 engine and how to navigate projects using specialized modes and structured phases.
 
-## 🗺️ The 5 Phases (Timeline)
+## 🗺️ Operation Modes
+
+The Kit adapts its logic based on what you are doing:
+
+- **🏗️ BUILD**: Creating new software. Uses the full 5-phase Golden Path.
+- **🔍 AUDIT**: Analyzing existing software. Focuses on understanding and mapping.
+- **📚 DOCUMENT**: Writing manuals and API docs. Skips straight to content generation.
+
+## 🗺️ The Phases (Execution Flow)
 
 ```mermaid
-graph TD
-    F0[PHASE 0: CONFIG] -->|Init Status| F1[PHASE 1: FOUNDATION]
-    F1 -->|Stable Brand & Arch| F2[PHASE 2: BUILD]
-    F2 -->|Functional Feature| F3[PHASE 3: CONTROL]
-    F3 -->|Stable Code| F4[PHASE 4: LAUNCH]
-    F4 -->|Production Ready| END(Project Complete)
-
-    subgraph "STRATEGY"
-    F1
+graph LR
+    subgraph "Setup"
+    F0[PHASE 0: CONFIG]
     end
 
-    subgraph "DEVELOPMENT"
-    F2
+    subgraph "Core Engine"
+    F1[PHASE 1: FOUNDATION] --> F2[PHASE 2: BUILD]
+    F2 --> F3[PHASE 3: CONTROL]
+    F3 --> F2
     end
 
-    subgraph "QUALITY"
-    F3
+    subgraph "Delivery"
+    F4[PHASE 4: LAUNCH]
     end
 
-    subgraph "CONTENT"
-    F4
-    end
+    F0 --> F1
+    F3 --> F4
+
+    style F1 fill:#f9f,stroke:#333,stroke-width:2px
+    style F3 fill:#bbf,stroke:#333,stroke-width:2px
 ```
 
-## 🤖 Agent Specialization & Handoffs
+## 🤖 Mode-Specific Routing
 
-The AI Kit is designed for a **Multi-Agent Relay**. Each phase is an opportunity to switch to the most efficient tool for the job.
-
-| Phase | Recommended Agent Role | Why Switch? |
+| Mode | Primary Focus | Key Outputs |
 | :--- | :--- | :--- |
-| **PHASE 1: STRATEGY** | Architect / Strategist | Better at broad vision and UX theory. |
-| **PHASE 2: DEVELOPMENT** | Builder / Terminal Coder | Faster at multi-file edits and terminal tasks. |
-| **PHASE 3: QUALITY** | Auditor / Quality Agent | Fresh perspective on security and performance. |
-| **PHASE 4: CONTENT** | Content / SEO Specialist | Specialized in copywriting; saves coding tokens. |
+| **BUILD** | New implementation | Clean code, Design System, Functional App. |
+| **AUDIT** | Analysis & Strategy | Map, Flow, Quality, Security, and Plan reports. |
+| **DOCUMENT** | Communication | README, API Reference, User Guide, SEO Meta. |
 
-## ⚙️ How the Engine Works (Mind Map)
+## ⚙️ How the Engine Works
 
-1. **Initial Prompt**: User points the agent to the `PROMPT.md` entry point.
-2. **Master Rules**: The agent loads `MASTER-RULES.md`, establishing the "Agnostic Awareness".
-3. **Status Reading**: The agent reads `[ID]-STATUS.md` to find its location on the **Golden Path**.
-4. **Skill Loading**: Based on the `CURRENT_PHASE`, the agent loads the relevant skills.
-5. **Initialization Statement**: The agent confirms its status: *"Skill: X, Phase: Y, Category: Z"*.
-6. **Handoff / Drift**: If the user's request changes the category, the agent triggers **Drift Detection** and suggests a transition.
-7. **Historification**: Every major decision is logged in `[ID]-HISTORY.md` to ensure session continuity.
+1.  **Initial Interview**: The agent verifies prerequisites (Git/Env) and asks for the `OPERATION_MODE`.
+2.  **Status Check**: The agent reads `[ID]-STATUS.md` to load the current `OPERATION_MODE` and `CURRENT_PHASE`.
+3.  **Skill Loading**: The agent loads only the skills required for the current mode/phase combo.
+4.  **Zero-Step Statement**: The agent confirms: *"Skills: [X], Mode: [MODE], Phase: [PHASE]"*.
+5.  **Autonomous Loop**: The agent builds or audits until a stable milestone is reached.
+6.  **Milestone Gate**: A quality audit (Checkpoint) is mandatory before moving to the next phase.
 
 ---
-*Follow the Golden Path. Don't jump. Build to last.*
+*One Kit. Three Modes. Infinite Professional Workflows.*
