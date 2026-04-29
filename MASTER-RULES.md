@@ -57,6 +57,7 @@ You must identify which **Specialization Category** the current task belongs to.
 |-----------|---------------|----------|------|
 | **"Start new project"** | `core-workflow` | CONFIG | BUILD |
 | **"Audit existing code"** | `core-audit` | QUALITY | AUDIT |
+| **"Execute audit fixes"** | `core-refactor` | QUALITY | BUILD |
 | **"Write documentation"** | `core-documentation` | CONTENT | DOCUMENT |
 | **"Define brand/identity"** | `brand-discovery` | STRATEGY | ANY |
 | **"Technical architecture"** | `core-architecture` | STRATEGY | ANY |
