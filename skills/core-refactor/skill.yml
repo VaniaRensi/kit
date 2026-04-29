@@ -3,7 +3,6 @@ id: core-refactor
 order: 36
 category: quality
 description: >
-  Executes the AUDIT-PLAN.md fix-by-fix, in priority order (CRITICAL → HIGH → MEDIUM → LOW).
-  Use this skill immediately after core-audit produces its 6 reports. It governs HOW to rewrite
-  code safely — one item at a time, with scope control and a checkpoint before advancing levels.
-  Never use this skill without a completed AUDIT-PLAN.md.
+  Executes AUDIT-PLAN.md fix-by-fix (CRITICAL → HIGH → MEDIUM → LOW). All rewritten files go
+  into a [ID]-REFACTOR/ sandbox folder — originals are never touched. Produces a SWAP-GUIDE.md
+  with exact commands to apply changes when approved. Never run without a completed AUDIT-PLAN.md.
