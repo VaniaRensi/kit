@@ -68,6 +68,25 @@ MEDIUM and LOW can be batched into a single final checkpoint.
 
 ---
 
+## 📚 Standards Reference — Which Skill to Load Per Fix Type
+
+Every fix in `AUDIT-PLAN.md` belongs to a category. Before applying a fix, load the skill that defines the quality standard for that category. This is how the Kit's treasure hunt applies during a refactor — you never work from memory alone.
+
+| Fix Category | Skill to Load | What It Defines |
+|---|---|---|
+| Naming violations | `core-naming` | Conventions for variables, functions, files, DB columns |
+| Architecture violations | `core-architecture` | Separation of concerns, feature-based structure, size limits |
+| UI / Missing design tokens | `web-design-tokens` | 3-layer token system + token migration protocol |
+| UI / Component patterns | `web-ux-ui` | Accessible primitives, layout systems, optimistic UI |
+| UX / Hierarchy or accessibility | `core-ux` | 8 universal UX principles, audit checklist |
+| Security vulnerabilities | `core-quality` §Security | RLS, env vars, sanitization, auth checks |
+| Documentation gaps | `core-documentation` | What/how/when to document; README and interface standards |
+| Architecture decision required | `core-architecture` | Stop refactor — redesign first, then return here |
+
+**How to use this table:** when you pick up a fix item from `AUDIT-PLAN.md`, find its category, load the corresponding skill, read the relevant section, then apply the fix. Do not guess the standard — read it.
+
+---
+
 ## 🛡️ Scope Control Rules
 
 These rules prevent refactor drift — the #1 cause of regressions:

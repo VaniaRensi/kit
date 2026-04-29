@@ -10,6 +10,53 @@ Documentation has a dual problem: too little and nobody understands the code. To
 
 ---
 
+## 🚀 Execution Workflow — Step by Step
+
+Documentation is not freeform writing. Follow this sequence every time.
+
+### Step 1 — Load Context (Before Writing Anything)
+
+Read the project files that define the truth before you write a single word:
+
+| What you're documenting | File to read first | Skill to load |
+|---|---|---|
+| Architecture decisions | `[ID]-ARCHITECTURE.md` | `core-architecture` |
+| Brand voice and product description | `[ID]-BRAND.md` | `brand-discovery` |
+| UX flows and interface decisions | `[ID]-STATUS.md` + audit reports | `core-ux` |
+| Design system and token decisions | `globals.css` or token file | `web-design-tokens` |
+| Audit findings summary | `AUDIT-PLAN.md` + all 6 reports | `core-audit` |
+| Security posture | `AUDIT-SECURITY.md` | `core-quality` |
+
+Never document from memory. If the source file does not exist, flag it before writing.
+
+### Step 2 — Identify Which Documents to Produce
+
+Every project needs a minimum set. Check what's missing:
+
+| Document | Required | Skill Reference |
+|---|---|---|
+| `README.md` | Always | This skill (see template below) |
+| Inline code comments | Always | This skill (see Core Principle) |
+| `DECISIONS.md` | If >3 major architectural choices | `core-architecture` |
+| API Reference | If the project exposes a public API | This skill (see Public Interfaces) |
+| User Guide | If end-users interact with the product | `core-ux` for UX language |
+| SEO meta descriptions | If it's a web product | `core-ux` §Readability |
+| `AUDIT-SUMMARY.md` | If the project went through AUDIT mode | Synthesize from the 6 audit reports |
+
+### Step 3 — Write, Section by Section
+
+Work through the document list one file at a time. For each:
+1. Draft the content based on source files (Step 1).
+2. Apply the Core Principle: document the **why**, not the **what**.
+3. Verify against the "What NOT to Document" list below.
+4. Mark the item done in `[ID]-STATUS.md`.
+
+### Step 4 — Final Documentation Checkpoint
+
+Before declaring documentation STABLE, verify every item in the "During a Checkpoint" section at the bottom of this skill.
+
+---
+
 ## The Core Principle — The Why, Not the What
 
 Well-written code already says **what** it does. Documentation explains **why** it does it that way, or **why not** another way.
@@ -169,6 +216,12 @@ In the documentation review, verify:
 1. **Current State**: PHASE 4: LAUNCH (Category: **CONTENT**).
 2. **Objective**: Make the project understandable and maintainable long-term.
 3. **Recommended Next Step**:
-   - If documentation is complete → The project is ready for delivery or final deployment.
-   - If interface needs refinement → Skill: `core-ux` (Phase 4: LAUNCH).
-4. **Tool Tip**: For writing high-quality documentation or SEO copy, a standard Chat AI agent is often more creative and cost-effective than a terminal agent.
+   - If documentation is complete → Load `core-phases` to generate the final handover package.
+   - If UX copy or SEO needs work → Load `core-ux` (Phase 4: LAUNCH).
+   - If architectural decisions are undocumented → Load `core-architecture` and read before writing.
+   - If brand voice is unclear → Load `brand-discovery` and read `[ID]-BRAND.md` first.
+4. **Where this skill sits in the flow**:
+   ```
+   core-refactor → core-quality (checkpoint) → core-documentation → core-phases (handover)
+   ```
+5. **Tool Tip**: A Chat AI agent (not a terminal agent) is best for writing documentation — it produces cleaner prose and is more cost-effective than a coding agent for this phase.

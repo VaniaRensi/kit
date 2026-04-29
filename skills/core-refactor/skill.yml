@@ -1,4 +1,6 @@
 name: core-refactor
+id: core-refactor
+order: 36
 category: quality
 description: >
   Executes the AUDIT-PLAN.md fix-by-fix, in priority order (CRITICAL → HIGH → MEDIUM → LOW).
