@@ -2,7 +2,7 @@ id: web-deploy
 order: 90
 name: "Pre-Launch"
 description: "Execute a final production checklist for SEO, performance, accessibility, and security."
-category: SVILUPPO
+category: development
 level: [beginner, experienced]
 platform: [web]
 language: [all]

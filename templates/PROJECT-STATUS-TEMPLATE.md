@@ -4,9 +4,12 @@
 > These variables drive the AI Skill Routing. Do not remove.
 
 - **PROJECT_ID**: [2-3 chars, e.g., CLN, HUB, KIT]
-- **CURRENT_PHASE**: [FASE 0 | FASE 1 | FASE 2 | FASE 3 | FASE 4]
+- **CURRENT_PHASE**: [PHASE 0 | PHASE 1 | PHASE 2 | PHASE 3 | PHASE 4]
 - **PLATFORM**: [web | mobile | backend | multi]
 - **STACK**: [nextjs-tailwind | react-native | python-fastapi | etc.]
+- **APP_LANGUAGE**: [e.g., en, it - Code, UI, Commits]
+- **AI_CHAT_LANGUAGE**: [e.g., en, it - AI replies]
+- **USER_CHAT_LANGUAGE**: [e.g., any, it - User prompts]
 - **UX_STRATEGY**: [gamified | minimalist | high-density | enterprise]
 - **BRAND_STATUS**: [pending | in-progress | stable | skipped]
 
@@ -20,16 +23,16 @@
   - [ ] Project initialized
   - [ ] External Infrastructure (Supabase/Vercel) created
   - [ ] Environment Variables (.env) ready
-- [ ] **F1: FONDAMENTA (STRATEGIA)**
+- [ ] **PHASE 1: FOUNDATION (STRATEGY)**
 
 | Phase | Milestone | Status | Skill Required |
 |-------|-----------|--------|----------------|
-| **F0: CONFIG** | Setup & Initialization | ✅ Stable | `core-workflow` |
-| **F1: FONDAMENTA** | Brand Discovery | 🔄 In-Progress | `brand-discovery` |
-| **F1: FONDAMENTA** | Architecture Design | 📋 To-Do | `core-architecture` |
-| **F2: COSTRUZIONE** | UI Implementation | 📋 To-Do | `web-ux-ui` |
-| **F3: CONTROLLO** | Security & Quality | 📋 To-Do | `core-quality` |
-| **F4: LANCIO** | SEO & Content | 📋 To-Do | `core-documentation` |
+| **PHASE 0: CONFIG** | Setup & Initialization | ✅ Stable | `core-workflow` |
+| **PHASE 1: FOUNDATION** | Brand Discovery | 🔄 In-Progress | `brand-discovery` |
+| **PHASE 1: FOUNDATION** | Architecture Design | 📋 To-Do | `core-architecture` |
+| **PHASE 2: BUILD** | UI Implementation | 📋 To-Do | `web-ux-ui` |
+| **PHASE 3: CONTROL** | Security & Quality | 📋 To-Do | `core-quality` |
+| **PHASE 4: LAUNCH** | SEO & Content | 📋 To-Do | `core-documentation` |
 
 ---
 

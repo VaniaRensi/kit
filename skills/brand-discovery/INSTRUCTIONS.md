@@ -1,6 +1,6 @@
 ---
 name: brand-discovery
-category: STRATEGIA
+category: strategy
 description: Guides the strategic discovery phase before any design or frontend work. Activate this skill when starting a project with a user interface, before writing any visual code. Covers two paths: client with an existing brand (collecting logo, colors, fonts, voice) and project without a brand (proposing stylistic directions based on industry and audience). Produces BRAND-BRIEF.md which feeds into design-tokens and ux-ui-kit.
 ---
 
@@ -180,11 +180,11 @@ At the end of both paths, create the `BRAND-BRIEF.md` file in the project folder
 
 ---
 
-## 🏁 Percorso Skills & Prossimo Passo
+## 🏁 Skill Path & Next Step
 
-1. **Stato Attuale**: FASE 1: FONDAMENTA (Categoria: **STRATEGIA**).
-2. **Obiettivo**: Stabilizzare il `BRAND-BRIEF.md`.
-3. **Prossimo Passo Consigliato**:
-   - Se il Brand è stabile -> Skill: `web-design-tokens` (Fase 2: SVILUPPO).
-   - Se serve definire l'architettura tecnica -> Skill: `core-architecture` (Fase 1: FONDAMENTA).
-4. **Tool Tip**: Se stai passando alla Fase 2 (SVILUPPO), considera di switchare a un agente specializzato in codice (es. Claude Code, Cursor) per massimizzare l'efficienza.
+1. **Current State**: PHASE 1: FOUNDATION (Category: **STRATEGY**).
+2. **Objective**: Stabilize the `[ID]-BRAND.md`.
+3. **Recommended Next Step**:
+   - If the Brand is stable → Skill: `web-design-tokens` (Phase 2: BUILD).
+   - If technical architecture needs to be defined → Skill: `core-architecture` (Phase 1: FOUNDATION).
+4. **Tool Tip**: When transitioning to Phase 2 (BUILD), consider switching to an agent specialized in code (e.g., Claude Code, Cursor) to maximize efficiency.

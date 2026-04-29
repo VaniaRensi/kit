@@ -2,7 +2,7 @@ id: core-naming
 order: 31
 name: "Naming Conventions"
 description: "Create predictable, descriptive, and English-first names for all code elements."
-category: QUALITÀ
+category: quality
 level: [beginner, experienced]
 platform: [all]
 language: [all]

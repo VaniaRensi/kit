@@ -2,7 +2,7 @@ id: web-design-tokens
 order: 70
 name: "Design Tokens"
 description: "Build maintainable systems using a tiered token architecture and derived color variance."
-category: SVILUPPO
+category: development
 level: [experienced]
 platform: [web]
 language: [css, all]

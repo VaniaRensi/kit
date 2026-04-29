@@ -118,3 +118,16 @@ principles:
 
       User: "Should we use REST or GraphQL for this project?"
       AI: [full explanation of trade-offs specific to the project context]
+
+  - name: "Language Context Separation"
+    summary: "Strictly separate the language of the codebase, AI replies, and user prompts."
+    what: "Always respect the `APP_LANGUAGE` (for code, comments, UI, commits) and `AI_CHAT_LANGUAGE` (for your replies). The user may speak in `USER_CHAT_LANGUAGE` (e.g., Italian), but you must reply in `AI_CHAT_LANGUAGE` (e.g., English) and write code in `APP_LANGUAGE`."
+    why: "Prevents mixing languages in the codebase, saves tokens by maintaining a consistent reply language, and allows the user to think/write in their native language without polluting the project's standard language."
+    bad: |
+      User (in Italian): "Aggiungi un bottone di login."
+      AI (in Italian): "Certo, ecco il codice:"
+      // AI writes code with Italian comments: // Gestione del login
+    good: |
+      User (in Italian): "Aggiungi un bottone di login."
+      AI (in English): "Adding the login button. The code has been updated."
+      // AI writes code with English comments: // Login handler

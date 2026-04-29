@@ -1,6 +1,6 @@
 ---
 name: web-design-tokens
-category: SVILUPPO
+category: development
 description: Technical design system architecture using semantic tokens and fluid scaling.
 ---
 
@@ -25,11 +25,11 @@ Use `clamp()` for spacing and typography to eliminate the need for media queries
 - **Spacing**: `gap-grid`, `p-card`, `py-section`.
 - **Typography**: `text-heading-lg`, `text-body`.
 
-## 🏁 Percorso Skills & Prossimo Passo
+## 🏁 Skill Path & Next Step
 
-1. **Stato Attuale**: FASE 2: COSTRUZIONE (Categoria: **SVILUPPO**).
-2. **Obiettivo**: Creare il sistema tecnico di token (Colori, Spazi, Tipografia) pronto per il codice.
-3. **Prossimo Passo Consigliato**:
-   - Se i token sono pronti -> Skill: `web-ux-ui` per implementare i componenti.
-   - Se serve un controllo di accessibilità sui colori -> Skill: `core-ux` (Fase 1: FONDAMENTA).
-4. **Tool Tip**: Un agente specializzato in codice ("Builder") è perfetto qui per scrivere il CSS e configurare il design system.
+1. **Current State**: PHASE 2: BUILD (Category: **DEVELOPMENT**).
+2. **Objective**: Create the technical token system (Colors, Spacing, Typography) ready for code.
+3. **Recommended Next Step**:
+   - If tokens are ready → Skill: `web-ux-ui` to implement components.
+   - If color accessibility review is needed → Skill: `core-ux` (Phase 1: FOUNDATION).
+4. **Tool Tip**: A code-specialized agent ("Builder") is ideal here for writing CSS and configuring the design system.

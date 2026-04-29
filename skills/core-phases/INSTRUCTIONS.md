@@ -13,10 +13,10 @@ When the user says "Ready for the next phase" or when a phase transition occurs,
 
 **1. Project State**
 - **ID**: `[PROJECT_ID]`
-- **Current Phase**: `[e.g., FASE 1: FONDAMENTA]`
-- **Target Phase**: `[e.g., FASE 2: COSTRUZIONE]`
-- **Work Category**: `[e.g., SVILUPPO]`
-- **Infrastructure Ready**: `[SI/NO] (Verificare Supabase/Vercel/ENV)`
+- **Current Phase**: `[e.g., PHASE 1: FOUNDATION]`
+- **Target Phase**: `[e.g., PHASE 2: BUILD]`
+- **Work Category**: `[e.g., DEVELOPMENT]`
+- **Infrastructure Ready**: `[YES/NO] (Verify Supabase/Vercel/ENV)`
 
 **2. Files to Read**
 - Primary Source of Truth: `[ID]-STATUS.md`
@@ -24,7 +24,7 @@ When the user says "Ready for the next phase" or when a phase transition occurs,
 - Config Truth: `.env.example`
 
 **3. Instructions for the New Agent**
-- **Target Role**: `[e.g., Agente specializzato in SVILUPPO]`
+- **Target Role**: `[e.g., Agent specialized in DEVELOPMENT]`
 - **Context**: `[1-sentence summary of what has been decided/built]`
 - **Next Milestone**: `[Next task from STATUS file]`
 
@@ -35,17 +35,17 @@ When the user says "Ready for the next phase" or when a phase transition occurs,
 
 ## 🗺️ Standard Transitions (The Golden Path)
 
-### Path 1: FASE 1 (STRATEGIA) → FASE 2 (SVILUPPO)
+### Path 1: PHASE 1 (STRATEGY) → PHASE 2 (DEVELOPMENT)
 - **When**: Brand is stable, Architecture is designed.
 - **Agent Switch**: Highly recommended if using a specialized code-terminal agent.
 - **Focus**: Implementation, naming conventions, clean UI.
 
-### Path 2: FASE 2 (SVILUPPO) → FASE 3 (QUALITÀ)
+### Path 2: PHASE 2 (DEVELOPMENT) → PHASE 3 (QUALITY)
 - **When**: Feature is built and functional.
 - **Agent Switch**: Optional, but good for a fresh "audit" perspective.
 - **Focus**: Security, performance, refactoring.
 
-### Path 3: FASE 3 (QUALITÀ) → FASE 4 (CONTENUTI)
+### Path 3: PHASE 3 (QUALITY) → PHASE 4 (CONTENT)
 - **When**: Code is STABLE.
 - **Agent Switch**: Recommended to switch to a specialized content/SEO agent to save coding tokens.
 - **Focus**: SEO, Copywriting, User Documentation.
@@ -54,4 +54,4 @@ When the user says "Ready for the next phase" or when a phase transition occurs,
 
 Once the phase transition package is generated:
 1. **Wait for user** to confirm they have transitioned to the new agent/tool.
-2. **Warn on token efficiency**: Remind the user that switching to a simpler agent for Phase 4 (CONTENUTI) saves cost and prevents unnecessary context loading.
+2. **Warn on token efficiency**: Remind the user that switching to a simpler agent for Phase 4 (CONTENT) saves cost and prevents unnecessary context loading.

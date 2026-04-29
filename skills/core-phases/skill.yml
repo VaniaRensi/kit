@@ -2,7 +2,7 @@ id: core-phase-transition
 order: 100
 name: "Phase & Agent Transition"
 description: "Manage the transition between different specialized AI agents and project phases."
-category: AGNOSTICO
+category: agnostic
 level: [experienced]
 platform: [all]
 language: [all]

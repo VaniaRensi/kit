@@ -1,6 +1,6 @@
 ---
 name: web-ux-ui
-category: SVILUPPO
+category: development
 description: Professional web interface patterns using Tailwind, accessible primitives, and consistent layout systems.
 ---
 
@@ -29,14 +29,14 @@ Ensure all interactive elements (buttons, links, inputs) have:
     - User Management (view/edit subscribers).
     - Settings Management (plans, feature flags, global constants).
     - Database Health check.
-    - Suffix the logic based on the Strategy defined in FASE 1.
+    - Suffix the logic based on the Strategy defined in PHASE 1.
 4.  **Apply Tokens**: Style using only framework tokens from `globals.css`.
 
-## 🏁 Percorso Skills & Prossimo Passo
+## 🏁 Skill Path & Next Step
 
-1. **Stato Attuale**: FASE 2: COSTRUZIONE (Categoria: **SVILUPPO**).
-2. **Obiettivo**: Implementare interfacce web professionali, accessibili e performanti.
-3. **Prossimo Passo Consigliato**:
-   - Se la UI è pronta -> Skill: `core-quality` per il controllo qualità (Fase 3: CONTROLLO).
-   - Se serve una revisione UX -> Skill: `core-ux` (Fase 1: FONDAMENTA).
-4. **Tool Tip**: Un agente specializzato in codice ("Builder") è fondamentale qui per gestire la complessità dei componenti e dello stile.
+1. **Current State**: PHASE 2: BUILD (Category: **DEVELOPMENT**).
+2. **Objective**: Implement professional, accessible, and high-performance web interfaces.
+3. **Recommended Next Step**:
+   - If the UI is ready → Skill: `core-quality` for quality control (Phase 3: CONTROL).
+   - If a UX review is needed → Skill: `core-ux` (Phase 1: FOUNDATION).
+4. **Tool Tip**: A code-specialized agent ("Builder") is essential here to handle component and styling complexity.

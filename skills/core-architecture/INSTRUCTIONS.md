@@ -1,6 +1,6 @@
 ---
 name: core-architecture
-category: STRATEGIA
+category: strategy
 description: Universal code structure principles applicable to any language or platform. Activate this skill at the start of every project and whenever organizing a new feature. Governs how code is divided into pieces — not how it looks or what it does.
 ---
 
@@ -163,10 +163,10 @@ When working on already-written code:
 
 ---
 
-## 🏁 Percorso Skills & Prossimo Passo
+## 🏁 Skill Path & Next Step
 
-1. **Stato Attuale**: FASE 1: FONDAMENTA (Categoria: **STRATEGIA**).
-2. **Obiettivo**: Definire la struttura tecnica e lo stack.
-3. **Prossimo Passo Consigliato**:
-   - Se l'architettura è pronta -> Skill: `web-ux-ui` o `web-design-tokens` (Fase 2: SVILUPPO).
-4. **Tool Tip**: Rimani in un agente "Strategist" (Chat AI) per rifinire i dettagli tecnici prima di passare al terminale.
+1. **Current State**: PHASE 1: FOUNDATION (Category: **STRATEGY**).
+2. **Objective**: Define the technical structure and the tech stack.
+3. **Recommended Next Step**:
+   - If architecture is ready → Skill: `web-ux-ui` or `web-design-tokens` (Phase 2: BUILD).
+4. **Tool Tip**: Stay in a "Strategist" agent (Chat AI) to refine technical details before switching to a terminal/coder agent.

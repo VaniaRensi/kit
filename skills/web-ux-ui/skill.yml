@@ -2,7 +2,7 @@ id: web-ux-ui
 order: 80
 name: "Web Component Implementation"
 description: "Professional web interface patterns using Tailwind, accessible primitives, and consistent layout systems."
-category: SVILUPPO
+category: development
 level: [beginner, experienced]
 platform: [web]
 language: [javascript, typescript]
@@ -42,12 +42,12 @@ principles:
     bad: "A list that just shows a blank white space while loading data."
     good: "A list that shows a skeleton loader while fetching, and a friendly 'No items found' message if empty."
 
-    - name: "Instant Feedback (Optimistic UI)"
-      summary: "Don't make users wait for the server. Show the result immediately and sync in the background."
-      what: "Implement optimistic updates for actions like creating, deleting, or toggling items. The UI should reflect the change instantly before the server confirms."
-      why: "Server latency (especially on free plans) kills the user experience. Optimistic UI makes the app feel native and fast."
-      bad: "A button that stays disabled for 2 seconds while the server processes the request."
-      good: "A task that appears in the list immediately, with a subtle 'syncing' indicator if necessary, while the server write happens in the background."
+  - name: "Instant Feedback (Optimistic UI)"
+    summary: "Don't make users wait for the server. Show the result immediately and sync in the background."
+    what: "Implement optimistic updates for actions like creating, deleting, or toggling items. The UI should reflect the change instantly before the server confirms."
+    why: "Server latency (especially on free plans) kills the user experience. Optimistic UI makes the app feel native and fast."
+    bad: "A button that stays disabled for 2 seconds while the server processes the request."
+    good: "A task that appears in the list immediately, with a subtle 'syncing' indicator if necessary, while the server write happens in the background."
 
   - name: "Responsive Layout Patterns"
     summary: "Use standard grid and flex patterns for consistent page architecture."

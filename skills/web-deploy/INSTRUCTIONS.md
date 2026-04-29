@@ -1,6 +1,6 @@
 ---
 name: web-deploy
-category: SVILUPPO
+category: development
 description: Final checklist to run before going live with a project. Activate this skill when the user says "we're ready to deploy", "let's go live", "loading to production", "let's publish". Covers production configuration, basic SEO, errors and crashes, performance, mobile, accessibility, final security. Run once only, after all development checkpoints have been passed.
 ---
 
@@ -127,11 +127,11 @@ Run sections in order. If you find problems, fix them before moving to the next 
 
 ---
 
-## 🏁 Percorso Skills & Prossimo Passo
+## 🏁 Skill Path & Next Step
 
-1. **Stato Attuale**: FASE 2: COSTRUZIONE / FASE 3: CONTROLLO (Categoria: **SVILUPPO**).
-2. **Obiettivo**: Verificare che il progetto sia tecnicamente pronto per la produzione.
-3. **Prossimo Passo Consigliato**:
-   - Se il deploy è avvenuto -> Skill: `core-documentation` o SEO (Fase 4: LANCIO).
-   - Se servono modifiche strutturali prima del lancio -> Skill: `web-ux-ui`.
-4. **Tool Tip**: Un agente specializzato in codice ("Builder") è necessario qui per gestire configurazioni server e variabili d'ambiente.
+1. **Current State**: PHASE 2: BUILD / PHASE 3: CONTROL (Category: **DEVELOPMENT**).
+2. **Objective**: Verify that the project is technically ready for production.
+3. **Recommended Next Step**:
+   - If deploy is complete → Skill: `core-documentation` or SEO (Phase 4: LAUNCH).
+   - If structural changes are needed before launch → Skill: `web-ux-ui`.
+4. **Tool Tip**: A code-specialized agent ("Builder") is necessary here to handle server configurations and environment variables.

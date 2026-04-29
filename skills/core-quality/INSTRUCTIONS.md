@@ -1,6 +1,6 @@
 ---
 name: security-quality
-category: QUALITÀ
+category: quality
 description: Security, code quality, testing, and performance checklist to run at project checkpoints. Use this skill when the user approves a checkpoint (planned or improvised), or when they explicitly ask "check security", "clean up the code", "do a review". Do not run these checks continuously — only at confirmed checkpoints.
 ---
 
@@ -19,7 +19,7 @@ This skill runs at confirmed checkpoints, not continuously. Execute the sections
 | **UI / CSS** | ✅/❌ | Tokens used, responsiveness, hover states |
 | **Context Specific** | ✅/❌ | Proactively find issues unique to THIS project |
 
-**🚨 Proactive Audit**: Oltre alle categorie standard, DEVI analizzare il progetto per identificare rischi o debiti tecnici specifici che non sono elencati sopra. Non limitarti a una lista passiva.
+**🚨 Proactive Audit**: In addition to the standard categories, you MUST analyze the project to identify specific risks or technical debt that are not listed above. Do not limit yourself to a passive checklist.
 
 ---
 
@@ -28,7 +28,7 @@ This skill runs at confirmed checkpoints, not continuously. Execute the sections
 1. Read all code involved in the milestone or block being verified
 2. Execute sections in order: Security → Quality → Testing → Performance → Git
 3. For each problem found: describe the problem, explain why it's a risk, propose the solution
-4. After correction, update `PROJECT-STATUS.md` and mark the area as STABLE
+4. After correction, update `[ID]-STATUS.md` and mark the area as STABLE
 
 ---
 
@@ -173,7 +173,7 @@ Commit frequently to create "Save Points." Don't wait for the end of the day.
 - **After every Checkpoint**: Once an area is marked as STABLE, commit it immediately.
 - **After major fixes**: If you spent 30 minutes fixing a bug, commit it once it works.
 - **Before major refactors**: Save the current state before you start changing everything.
-- **🚨 COMMIT AUTHORIZATION**: Prima di eseguire qualsiasi comando di `git commit` o `git push`, devi fermarti e chiedere esplicitamente: *"Ho completato [task/checkpoint], posso procedere con il commit e il push?"*. Non dare mai per scontato che l'utente voglia pushare immediatamente, specialmente se il push attiva un deploy automatico (Vercel/Netlify).
+- **🚨 COMMIT AUTHORIZATION**: Before executing any `git commit` or `git push` command, you MUST stop and explicitly ask: *"I have completed [task/checkpoint], may I proceed with the commit and push?"*. Never assume the user wants to push immediately, especially if the push triggers an automatic deploy (Vercel/Netlify).
 - **Never** commit code that doesn't build or has red tests.
 
 ### When to Push to GitHub
@@ -201,12 +201,12 @@ After running the checkpoint, report as follows:
 ✅ Performance: no relevant issues
 ✅ Git: commit ready (see below)
 
-## 🏁 Percorso Skills & Prossimo Passo
+## 🏁 Skill Path & Next Step
 
-1. **Stato Attuale**: FASE 3: CONTROLLO (Categoria: **QUALITÀ**).
-2. **Obiettivo**: Consolidare il codice e marcare l'area come STABLE.
-3. **Prossimo Passo Consigliato**:
-   - Se il codice è STABLE -> Skill: `core-documentation` o SEO (Fase 4: LANCIO).
-   - Se serve un altro ciclo di sviluppo -> Skill: `web-ux-ui` (Fase 2: SVILUPPO).
-4. **Tool Tip**: Un agente specializzato in "Audit" (come Claude Code) è perfetto per questa fase di pulizia profonda.
+1. **Current State**: PHASE 3: CONTROL (Category: **QUALITY**).
+2. **Objective**: Consolidate the code and mark the area as STABLE.
+3. **Recommended Next Step**:
+   - If code is STABLE → Skill: `core-documentation` or SEO (Phase 4: LAUNCH).
+   - If another development cycle is needed → Skill: `web-ux-ui` (Phase 2: BUILD).
+4. **Tool Tip**: An agent specialized in "Audit" (like Claude Code) is ideal for this deep cleanup phase.
 ```

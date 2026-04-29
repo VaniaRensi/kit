@@ -2,7 +2,7 @@ id: brand-discovery
 order: 10
 name: "Brand Discovery"
 description: 'Define visual identity, restricted palettes, and strategic typography as a source of truth.'
-category: STRATEGIA
+category: strategy
 level: [beginner, experienced]
 platform: [web, mobile]
 language: [all]

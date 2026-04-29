@@ -1,6 +1,6 @@
 ---
 name: historification
-category: AGNOSTICO
+category: agnostic
 description: Maintaining a decision log and local snapshots of the project.
 ---
 
@@ -8,9 +8,9 @@ description: Maintaining a decision log and local snapshots of the project.
 
 This skill ensures that the project has a memory. It prevents "circular engineering" (trying something that was already tried and failed) and provides insurance against destructive changes.
 
-## 1. The Decision Log (`HISTORIFICATION.md`)
+## 1. The Decision Log (`[ID]-HISTORY.md`)
 
-When a major architectural decision is made, create or update `HISTORIFICATION.md` in the root directory.
+When a major architectural decision is made, create or update `[ID]-HISTORY.md` in the root directory.
 
 ### Entry Structure
 ```markdown
@@ -38,10 +38,10 @@ Before making high-risk changes (e.g., changing colors, refactoring the layout, 
 ### Restoring a Snapshot
 If a future change breaks the UI beyond easy repair, the AI agent must consult the latest snapshot and restore the files to return to the last known-good state.
 
-## 🏁 Percorso Skills & Prossimo Passo
+## 🏁 Skill Path & Next Step
 
-1. **Stato Attuale**: Trasversale (Categoria: **AGNOSTICO**).
-2. **Obiettivo**: Garantire la persistenza delle decisioni e dei "punti di ripristino" del progetto.
-3. **Prossimo Passo Consigliato**:
-   - Se hai salvato uno snapshot -> Continua con la Fase corrente (SVILUPPO o QUALITÀ).
-4. **Tool Tip**: Qualsiasi agente può (e deve) historificare, ma uno Strategist è migliore nel documentare il "perché" delle scelte.
+1. **Current State**: Cross-cutting (Category: **AGNOSTIC**).
+2. **Objective**: Ensure persistence of decisions and project restore points.
+3. **Recommended Next Step**:
+   - If you saved a snapshot → Continue with the current phase (DEVELOPMENT or QUALITY).
+4. **Tool Tip**: Any agent can (and should) historify, but a Strategist is best at documenting the *why* behind decisions.

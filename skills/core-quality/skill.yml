@@ -2,7 +2,7 @@ id: core-quality
 order: 50
 name: "Security & Quality"
 description: "Enforce security, credential management, and git conventions via systematic checklists."
-category: QUALITÀ
+category: quality
 level: [beginner, experienced]
 platform: [all]
 language: [all]

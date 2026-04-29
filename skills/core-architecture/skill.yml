@@ -2,7 +2,7 @@ id: core-architecture
 order: 30
 name: "Architecture"
 description: "Implement scalable software architecture using SOLID principles, modular structures, and strict dependency boundaries."
-category: STRATEGIA
+category: strategy
 level: [beginner, experienced]
 platform: [all]
 language: [all]

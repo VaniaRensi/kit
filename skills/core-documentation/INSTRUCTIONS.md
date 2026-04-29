@@ -1,6 +1,6 @@
 ---
 name: core-documentation
-category: CONTENUTI
+category: content
 description: Universal principles for code and project documentation. Activate this skill at the start of every project and when establishing a documentation strategy. Governs what to document, when, and how — without over-documenting or under-documenting.
 ---
 
@@ -164,11 +164,11 @@ In the documentation review, verify:
 
 ---
 
-## 🏁 Percorso Skills & Prossimo Passo
+## 🏁 Skill Path & Next Step
 
-1. **Stato Attuale**: FASE 4: LANCIO (Categoria: **CONTENUTI**).
-2. **Obiettivo**: Rendere il progetto comprensibile e manutenibile a lungo termine.
-3. **Prossimo Passo Consigliato**:
-   - Se la documentazione è completa -> Il progetto è pronto per la consegna o il deployment finale.
-   - Se serve rifinire l'interfaccia -> Skill: `core-ux` (Fase 4: LANCIO).
-4. **Tool Tip**: Per scrivere documentazione di alta qualità o testi SEO, un agente standard (Chat AI) è spesso più creativo ed economico di un agente terminale.
+1. **Current State**: PHASE 4: LAUNCH (Category: **CONTENT**).
+2. **Objective**: Make the project understandable and maintainable long-term.
+3. **Recommended Next Step**:
+   - If documentation is complete → The project is ready for delivery or final deployment.
+   - If interface needs refinement → Skill: `core-ux` (Phase 4: LAUNCH).
+4. **Tool Tip**: For writing high-quality documentation or SEO copy, a standard Chat AI agent is often more creative and cost-effective than a terminal agent.

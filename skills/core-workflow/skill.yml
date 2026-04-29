@@ -2,7 +2,7 @@ id: core-workflow
 order: 20
 name: "Workflow AI"
 description: "Manage the end-to-end development lifecycle with structured kickoff, milestones, and session continuity."
-category: CONFIG
+category: config
 level: [beginner, experienced]
 platform: [all]
 language: [all]

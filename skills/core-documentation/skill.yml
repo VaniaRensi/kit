@@ -2,7 +2,7 @@ id: core-documentation
 order: 60
 name: "Documentation"
 description: 'Write clear READMEs, ADLs, and why-not-what comments for long-term maintainability.'
-category: CONTENUTI
+category: content
 level: [beginner, experienced]
 platform: [all]
 language: [all]

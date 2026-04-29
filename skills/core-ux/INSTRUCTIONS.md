@@ -1,6 +1,6 @@
 ---
 name: core-ux
-category: STRATEGIA
+category: strategy
 description: Universal user experience principles applicable to any interface — web, mobile, desktop, enterprise software. Activate this skill when designing or evaluating any interface a user interacts with. The principles here are technology-agnostic. CSS/React implementations are in web-ux-ui.
 ---
 
@@ -179,10 +179,10 @@ When analyzing an existing interface, verify in order:
 
 ---
 
-## 🏁 Percorso Skills & Prossimo Passo
+## 🏁 Skill Path & Next Step
 
-1. **Stato Attuale**: FASE 1: FONDAMENTA (Categoria: **STRATEGIA**).
-2. **Obiettivo**: Stabilire i principi di usabilità, gerarchia e accessibilità prima dello sviluppo.
-3. **Prossimo Passo Consigliato**:
-   - Se i principi UX sono chiari -> Skill: `web-ux-ui` o `web-design-tokens` (Fase 2: SVILUPPO).
-4. **Tool Tip**: Un agente focalizzato sulla "Strategia" (Chat AI) è ideale per discutere di flussi utente e gerarchia visiva senza perdersi nel codice.
+1. **Current State**: PHASE 1: FOUNDATION (Category: **STRATEGY**).
+2. **Objective**: Establish usability, hierarchy, and accessibility principles before development begins.
+3. **Recommended Next Step**:
+   - If UX principles are clear → Skill: `web-ux-ui` or `web-design-tokens` (Phase 2: BUILD).
+4. **Tool Tip**: A "Strategist" agent (Chat AI) is ideal for discussing user flows and visual hierarchy without getting lost in code.

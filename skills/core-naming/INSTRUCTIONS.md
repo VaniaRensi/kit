@@ -1,6 +1,6 @@
 ---
 name: core-naming
-category: QUALITÀ
+category: quality
 description: Universal code naming principles. Activate this skill at the start of every project and whenever establishing a naming convention. Governs how variables, functions, classes, files, and folders are named — regardless of language.
 ---
 
@@ -201,11 +201,11 @@ During a checkpoint or review, look for these anti-patterns:
 
 ---
 
-## 🏁 Percorso Skills & Prossimo Passo
+## 🏁 Skill Path & Next Step
 
-1. **Stato Attuale**: FASE 3: CONTROLLO (Categoria: **QUALITÀ**).
-2. **Obiettivo**: Garantire leggibilità e manutenibilità attraverso nomi chiari e professionali.
-3. **Prossimo Passo Consigliato**:
-   - Se il naming è verificato -> Skill: `core-quality` per checkpoint finale.
-   - Se serve documentare -> Skill: `core-documentation` (Fase 4: LANCIO).
-4. **Tool Tip**: Un agente specializzato in "Audit" (QUALITÀ) è il più adatto per rilevare nomi ambigui o non conformi.
+1. **Current State**: PHASE 3: CONTROL (Category: **QUALITY**).
+2. **Objective**: Ensure readability and maintainability through clear, professional names.
+3. **Recommended Next Step**:
+   - If naming is verified → Skill: `core-quality` for the final checkpoint.
+   - If documentation is needed → Skill: `core-documentation` (Phase 4: LAUNCH).
+4. **Tool Tip**: An agent specialized in "Audit" (QUALITY) is best suited for detecting ambiguous or non-compliant names.

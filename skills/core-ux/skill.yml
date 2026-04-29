@@ -2,7 +2,7 @@ id: core-ux
 order: 40
 name: "UX Principles"
 description: "Apply universal hierarchy, accessibility, and harmony principles to any interface."
-category: STRATEGIA
+category: strategy
 level: [beginner, experienced]
 platform: [web, mobile, desktop]
 language: [all]
