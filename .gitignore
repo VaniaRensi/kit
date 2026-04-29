@@ -1,0 +1,5 @@
+# Claude Code internal folders — never distribute these
+.claude/
+
+# OS
+.DS_Store
