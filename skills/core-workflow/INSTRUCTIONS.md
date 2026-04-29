@@ -42,7 +42,7 @@ You must work within the boundaries of the `CURRENT_PHASE` defined in `[ID]-STAT
 
 ## 🚦 Phase Gates & Transition
 
-- **Mode Drift**: If a user asks to "build" while in "AUDIT" mode, you MUST suggest switching the `OPERATION_MODE` in the status file before proceeding.
+- **Mode Drift**: If a user asks to "build" while in "AUDIT" mode, suggest switching `OPERATION_MODE` in the status file before proceeding.
 - **Phase Warning**: If jumping phases:
   > "Warning: we are still in `[CURRENT PHASE]`. Jumping to `[REQUESTED PHASE]` could cause technical debt. Proceed?"
 
@@ -50,10 +50,11 @@ You must work within the boundaries of the `CURRENT_PHASE` defined in `[ID]-STAT
 
 ## 🚀 Execution Cycle (The Loop)
 
+> **Initialization Statement format** is defined in `kit/MASTER-RULES.md` — that is the single source of truth. Do not redefine it here.
+
 Every task follows this loop:
 
-1.  **Initialization Statement**: Start EVERY response with:
-    > "Skills: `[skill-list]`. Mode: `[MODE]`. Phase: `[PHASE]`. Category: `[CATEGORY]`. Design: `[Status]`. App Lang: `[APP_LANG]`. Chat Lang: `[CHAT_LANG]`."
+1.  **Initialization Statement**: Output the statement as defined in `MASTER-RULES.md`.
 2.  **Confirm Goal**: State the specific milestone being worked on.
 3.  **Checkpoint**: Once stable, run the `core-quality` or `core-audit` checks.
 4.  **Commit**: Propose a structured commit message.
@@ -70,7 +71,8 @@ Your behavior is driven by `OPERATION_MODE` and `CURRENT_PHASE`:
   - `F3` -> `core-quality`.
 - **IF `MODE == AUDIT`**:
   - `F1` -> `core-audit` (Map & Flow).
-  - `F3` -> `core-audit` (Quality, Security, Plan).
+  - `F3` -> `core-audit` (Quality, Security, Deps, Plan).
+  - `F2` (after plan approved) -> `core-refactor` (execute AUDIT-PLAN.md).
 - **IF `MODE == DOCUMENT`**:
   - `F4` -> `core-documentation`, `core-ux` (SEO).
 

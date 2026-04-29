@@ -1,8 +1,8 @@
 name: core-audit
 id: core-audit
 order: 35
-version: 1.0.0
-description: Systematic analysis of an existing codebase.
+version: 2.0.0
+description: Systematic analysis of an existing codebase across 6 dimensions. Produces 6 standardized reports feeding into core-refactor.
 category: quality
 dependencies:
   - core-workflow
@@ -13,4 +13,6 @@ outputs:
   - AUDIT-FLOW.md
   - AUDIT-QUALITY.md
   - AUDIT-SECURITY.md
+  - AUDIT-DEPS.md
   - AUDIT-PLAN.md
+next_skill: core-refactor

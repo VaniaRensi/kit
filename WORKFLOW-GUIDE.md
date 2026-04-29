@@ -40,7 +40,7 @@ graph LR
 | Mode | Primary Focus | Key Outputs |
 | :--- | :--- | :--- |
 | **BUILD** | New implementation | Clean code, Design System, Functional App. |
-| **AUDIT** | Analysis & Strategy | Map, Flow, Quality, Security, and Plan reports. |
+| **AUDIT** | Analysis & Improvement | 6 Reports (Map, Flow, Quality, Security, Deps, Plan) → Refactor. |
 | **DOCUMENT** | Communication | README, API Reference, User Guide, SEO Meta. |
 
 ## ⚙️ How the Engine Works
@@ -51,6 +51,12 @@ graph LR
 4.  **Zero-Step Statement**: The agent confirms: *"Skills: [X], Mode: [MODE], Phase: [PHASE]"*.
 5.  **Autonomous Loop**: The agent builds or audits until a stable milestone is reached.
 6.  **Milestone Gate**: A quality audit (Checkpoint) is mandatory before moving to the next phase.
+
+### AUDIT Mode — Full Flow
+
+```
+core-audit (6 Reports) → AUDIT-PLAN.md approved → core-refactor (fix by fix) → core-quality (checkpoint) → core-documentation
+```
 
 ---
 *One Kit. Three Modes. Infinite Professional Workflows.*
