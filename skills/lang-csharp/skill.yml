@@ -1,0 +1,19 @@
+id: lang-csharp
+name: lang-csharp
+category: quality
+order: 60
+description: >
+  C# and .NET lens for core audit, refactor, and quality skills. Load this alongside
+  core-audit, core-refactor, or core-quality when the project is written in C#.
+  Covers naming conventions, .NET architecture patterns, dependency scanning,
+  security specifics, and testing conventions.
+use_with:
+  - core-audit
+  - core-quality
+  - core-naming
+  - core-architecture
+  - core-refactor
+detection:
+  - "*.csproj"
+  - "*.sln"
+  - "global.json"

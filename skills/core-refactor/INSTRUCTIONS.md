@@ -131,6 +131,7 @@ The Playbook already tells you which skill to load for each fix. This table is a
 | Security vulnerabilities | `core-quality` §Security | RLS, env vars, sanitization, auth |
 | Documentation gaps | `core-documentation` | What/how to document |
 | Architecture decision needed | `core-architecture` | Stop — redesign first, then return |
+| Language-specific conventions | `lang-[language]` (e.g. `lang-csharp`) | Naming, patterns, security for that stack |
 
 ---
 

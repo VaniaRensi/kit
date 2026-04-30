@@ -66,6 +66,7 @@ Every task follows this loop:
 Your behavior is driven by `OPERATION_MODE` and `CURRENT_PHASE`:
 
 - **IF `MODE == BUILD`**:
+  - `F0` (setup) → detect language stack: if a `lang-*` skill matches the project (e.g. `lang-csharp` for `.csproj`), load it now and keep it active for F2/F3.
   - `F1` -> `brand-discovery`, `core-architecture`.
   - `F2` -> `web-ux-ui`, `web-design-tokens`, `web-seo` (per page: content, metadata, images).
   - `F3` -> `core-quality`.

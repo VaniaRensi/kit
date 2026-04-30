@@ -67,6 +67,7 @@ You must identify which **Specialization Category** the current task belongs to.
 | **"Ready to deploy / go live"** | `web-deploy` | DEVELOPMENT | BUILD |
 | **"Audit / Security check"** | `core-quality` | QUALITY | ANY |
 | **"Switch agents / Handoff"** | `core-phases` | AGNOSTIC | ANY |
+| **Project uses a specific language** | `lang-[language]` (e.g. `lang-csharp`) | QUALITY | ANY |
 
 - **🛡️ MILESTONE GATEKEEPER**: It is strictly FORBIDDEN to propose or start the next Milestone before executing and presenting the **Checkpoint Summary Table** (skill `core-quality`).
 - **🛑 COMMIT AUTHORIZATION**: Before executing any `git commit` or `git push` operation, you MUST explicitly ask: *"I have completed [task], may I proceed with the commit and push?"*. Never assume authorization, especially if the push triggers an automatic deploy.
