@@ -48,11 +48,15 @@ Every audit MUST produce these six files in the root directory, prefixed with `A
 ### 5. `AUDIT-DEPS.md` (Dependency Health)
 - **Goal**: Surface risks from third-party packages.
 - **Content**:
-  - Run `npm audit` / `pip-audit` / `bundle audit` and record output.
+  - Run the appropriate scanner for the tech stack and record output:
+    - **Node.js**: `npm audit --json`
+    - **Python**: `pip-audit`
+    - **Ruby**: `bundle audit`
+    - **C# / .NET**: `dotnet list package --vulnerable` + `dotnet list package --outdated`
   - Outdated critical dependencies (flag anything >2 major versions behind).
   - Unused or duplicate dependencies (`depcheck` or equivalent).
   - License risks (GPL in a commercial project, etc.).
-  - Lock-file status (is `package-lock.json` / `yarn.lock` committed?).
+  - Lock-file status (is `package-lock.json` / `yarn.lock` / `packages.lock.json` committed?).
 
 ### 6. `AUDIT-PLAN.md` (Prioritized Action)
 - **Goal**: Roadmap for improvement, feeding directly into `core-refactor`.
@@ -72,8 +76,12 @@ Every audit MUST produce these six files in the root directory, prefixed with `A
 
 ## 🚦 Audit Workflow
 
-1.  **Exploration**: Run `ls -R` and read `package.json` / `requirements.txt`.
-2.  **Dependency Scan**: Run `npm audit --json` (or equivalent) and save raw output.
+1.  **Exploration**: Run `ls -R` and read the dependency manifest (`package.json`, `requirements.txt`, `*.csproj`, `Gemfile`, etc.). Then check for language-specific skill indicators:
+    - `.csproj` or `.sln` found → load `kit/skills/lang-csharp/INSTRUCTIONS.md` before continuing.
+    - `requirements.txt` or `pyproject.toml` found → check for `lang-python` skill.
+    - `go.mod` found → check for `lang-go` skill.
+    If a matching `lang-*` skill exists, load it now and apply its lens throughout the rest of the audit.
+2.  **Dependency Scan**: Run the appropriate scanner (see AUDIT-DEPS section above) and save raw output.
 3.  **Mapping**: Build `AUDIT-MAP.md` and `AUDIT-FLOW.md`.
 4.  **Deep Dive**: Sample 3–5 files per layer (UI, Service, Data) to evaluate quality and security.
 5.  **Reporting**: Finalize all 6 reports. Do NOT write `AUDIT-PLAN.md` until the other 5 are stable — the plan is a synthesis of the findings.

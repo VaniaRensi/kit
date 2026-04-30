@@ -66,9 +66,10 @@ Every task follows this loop:
 Your behavior is driven by `OPERATION_MODE` and `CURRENT_PHASE`:
 
 - **IF `MODE == BUILD`**:
-  - `F1` -> `brand-discovery`, `core-architecture`.
-  - `F2` -> `web-ux-ui`, `web-design-tokens`.
-  - `F3` -> `core-quality`.
+  - `F0` (setup) → check for language-specific skill: if a `lang-*` skill matches the project stack (e.g. `lang-csharp` for `.csproj`), load it now and keep it active for F2/F3.
+  - `F1` → `brand-discovery`, `core-architecture`.
+  - `F2` → `web-ux-ui`, `web-design-tokens` (+ active `lang-*` skill if applicable).
+  - `F3` → `core-quality`.
 - **IF `MODE == AUDIT`**:
   - `F1` -> `core-audit` (Map & Flow).
   - `F3` -> `core-audit` (Quality, Security, Deps, Plan).

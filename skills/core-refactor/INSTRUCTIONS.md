@@ -68,6 +68,23 @@ MEDIUM and LOW can be batched into a single final checkpoint.
 
 ---
 
+## 📚 Standards Reference
+
+Before applying any fix, load the skill that owns the standard you are fixing against. Do not invent criteria — the skill is the source of truth.
+
+| Fix Category | Skill to Load |
+|-------------|---------------|
+| Naming (variables, functions, classes) | `core-naming` |
+| Architecture (separation of concerns, patterns) | `core-architecture` |
+| UI layout, tokens, component structure | `web-ux-ui` + `web-design-tokens` |
+| UX principles, accessibility, hierarchy | `core-ux` |
+| Security vulnerabilities | `core-quality` |
+| Language-specific conventions (.NET, Python, etc.) | `lang-[language]` (e.g. `lang-csharp`) |
+
+Load only the skill relevant to the current fix. Do not load all skills upfront.
+
+---
+
 ## 🛡️ Scope Control Rules
 
 These rules prevent refactor drift — the #1 cause of regressions:
