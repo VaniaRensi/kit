@@ -16,7 +16,7 @@ This skill runs at confirmed checkpoints, not continuously. Execute the sections
 | **Security** | ✅/❌ | RLS, Env vars, Sanitization |
 | **Code Quality** | ✅/❌ | TS types, clean imports, naming |
 | **Performance** | ✅/❌ | Optimistic UI, bundle size |
-| **UI / CSS** | ✅/❌ | Tokens used, responsiveness, hover states, heading capitalisation consistent |
+| **UI / CSS** | ✅/❌ | Tokens used, responsiveness, hover states — load `core-ux` for full consistency rules |
 | **Context Specific** | ✅/❌ | Proactively find issues unique to THIS project |
 
 **🚨 Proactive Audit**: In addition to the standard categories, you MUST analyze the project to identify specific risks or technical debt that are not listed above. Do not limit yourself to a passive checklist.
