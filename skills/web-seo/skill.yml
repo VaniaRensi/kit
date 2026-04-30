@@ -1,0 +1,80 @@
+id: web-seo
+order: 85
+name: "Search Engine Optimization"
+description: "Master on-page and technical SEO to ensure discoverability, structural clarity, and search performance."
+category: development
+level: [beginner, experienced]
+platform: [web]
+language: [html, all]
+tags: [seo, metadata, keywords, accessibility, hierarchy, schema]
+use_with: [web-ux-ui, web-deploy]
+principles:
+  - name: "Semantic H1 Alignment"
+    summary: "The primary H1 must contain the core keyword from the URL and page intent."
+    what: "Ensure the H1 heading of a page explicitly includes the primary keyword used in the URL slug. This strengthens the semantic signal for both users and search crawlers."
+    why: "Discrepancies between the URL (/refactor) and the H1 ('Safe Transformation') confuse search engines and users about the page's primary topic."
+    bad: |
+      URL: /refactor
+      H1: "Safe Transformation"
+    good: |
+      URL: /refactor
+      H1: "Refactor with Confidence"
+
+  - name: "Logical Heading Hierarchy"
+    summary: "Use a single H1 per page followed by a strict nested hierarchy (H2, H3)."
+    what: "Every page must have exactly one H1. Subsequent sections must use H2, and sub-sections H3. Never skip levels (e.g., H1 to H3) for styling purposes."
+    why: "Assistive technologies and search crawlers use heading structure to build a document map. Correct nesting ensures the content is accessible and indexable."
+    bad: |
+      <div style="padding: 20px; background: #1a1a1a;">
+        <h1 style="color: white;">Title</h1>
+        <h3 style="color: #6366f1;">Sub-section (Skipped H2)</h3>
+        <h1 style="color: white;">Another Title (Multiple H1)</h1>
+      </div>
+    good: |
+      <div style="padding: 20px; background: #1a1a1a;">
+        <h1 style="color: white;">Main Title</h1>
+        <h2 style="color: #6366f1;">Section</h2>
+        <h3 style="color: #888;">Sub-section</h3>
+      </div>
+
+  - name: "Keyword-Rich Metadata"
+    summary: "Write titles and descriptions that are both crawler-friendly and human-clickable."
+    what: "Every route must have a unique <title> (under 60 chars) and <meta description> (under 160 chars) that includes primary keywords naturally."
+    why: "Metadata is your 'ad' in search results. Good metadata increases Click-Through Rate (CTR) and helps crawlers understand the page's specific value."
+    bad: |
+      <title>Welcome to the Website</title>
+      <meta name="description" content="This is a website about stuff.">
+    good: |
+      <title>Refactor | Professional AI Coding Standards | AI Kit Base</title>
+      <meta name="description" content="Learn the non-destructive sandbox strategy for refactoring legacy code safely with AI Kit.">
+
+  - name: "Image Context & Filenames"
+    summary: "Use descriptive filenames and meaningful Alt text for all images."
+    what: "Filenames should be descriptive (e.g., ai-kit-workflow-diagram.png, not image-01.png). Alt text must describe the content or function of the image for crawlers and screen readers."
+    why: "Search engines cannot 'see' images; they rely on filenames and alt text to index them in Image Search and understand their relevance to the page."
+    bad: |
+      <img src="/img/DSC01293.jpg" alt="image" />
+    good: |
+      <img src="/img/audit-playbook-synthesis-chart.webp" alt="Diagram showing how 6 audit reports are synthesized into a single AI Playbook" />
+
+  - name: "Clean URL Structures"
+    summary: "URLs should be short, descriptive, and use hyphens to separate words."
+    what: "Use human-readable slugs (e.g., /skills/core-ux) instead of ID-based or messy parameters (e.g., /page?id=123). Hyphens are the only standard separator."
+    why: "Clean URLs are easier to share, remember, and provide a clear hierarchy that search engines use to understand site structure."
+    bad: |
+      /view-page.php?category=strategy&id=42
+      /blog/post_version_final_2
+    good: |
+      /skills/core-naming
+      /blog/how-to-audit-legacy-code
+
+  - name: "Rich Visibility (OpenGraph & Schema)"
+    summary: "Implement structured data and social meta for enhanced visibility."
+    what: "Use JSON-LD schema for structured data (Article, Product, Breadcrumbs) and OpenGraph tags for social media previews."
+    why: "Rich snippets increase your presence in search results. OG tags ensure your links look professional and 'premium' when shared on LinkedIn, X, or Slack."
+    bad: |
+      <!-- No social or structured data -->
+    good: |
+      <meta property="og:title" content="AI Kit Base | Professional AI Coding" />
+      <meta property="og:image" content="/og-image.jpg" />
+      <script type="application/ld+json">{ "@context": "https://schema.org", "@type": "TechArticle", ... }</script>
