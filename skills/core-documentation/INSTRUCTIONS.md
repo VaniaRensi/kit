@@ -14,44 +14,22 @@ Documentation has a dual problem: too little and nobody understands the code. To
 
 Documentation is not freeform writing. Follow this sequence every time.
 
-### Step 1 — Load Context (Before Writing Anything)
+### Step 1 — Read the Playbook
 
-Read the project files that define the truth before you write a single word:
+If the project went through AUDIT mode, `[ID]-PLAYBOOK.md` already exists. Read the **Documentation Blueprint** section. It tells you exactly which documents to produce and which audit report contains the raw material for each. Do not re-read the raw audit reports unless you need a specific detail — the Playbook is your task list.
 
-| What you're documenting | File to read first | Skill to load |
-|---|---|---|
-| Architecture decisions | `[ID]-ARCHITECTURE.md` | `core-architecture` |
-| Brand voice and product description | `[ID]-BRAND.md` | `brand-discovery` |
-| UX flows and interface decisions | `[ID]-STATUS.md` + audit reports | `core-ux` |
-| Design system and token decisions | `globals.css` or token file | `web-design-tokens` |
-| Audit findings summary | `AUDIT-PLAN.md` + all 6 reports | `core-audit` |
-| Security posture | `AUDIT-SECURITY.md` | `core-quality` |
+If no Playbook exists (BUILD mode or fresh project), read `[ID]-BRAND.md` and `[ID]-ARCHITECTURE.md` as your primary context before writing anything.
 
-Never document from memory. If the source file does not exist, flag it before writing.
+### Step 2 — Write Each Document
 
-### Step 2 — Identify Which Documents to Produce
+Work through the Playbook's Documentation Blueprint one document at a time:
+1. Read the raw material file listed for that document.
+2. Load the referenced skill — it defines the standard for that document type.
+3. Apply the Core Principle: document the **why**, not the **what**.
+4. Verify against the "What NOT to Document" list below.
+5. Mark done in `[ID]-STATUS.md`.
 
-Every project needs a minimum set. Check what's missing:
-
-| Document | Required | Skill Reference |
-|---|---|---|
-| `README.md` | Always | This skill (see template below) |
-| Inline code comments | Always | This skill (see Core Principle) |
-| `DECISIONS.md` | If >3 major architectural choices | `core-architecture` |
-| API Reference | If the project exposes a public API | This skill (see Public Interfaces) |
-| User Guide | If end-users interact with the product | `core-ux` for UX language |
-| SEO meta descriptions | If it's a web product | `core-ux` §Readability |
-| `AUDIT-SUMMARY.md` | If the project went through AUDIT mode | Synthesize from the 6 audit reports |
-
-### Step 3 — Write, Section by Section
-
-Work through the document list one file at a time. For each:
-1. Draft the content based on source files (Step 1).
-2. Apply the Core Principle: document the **why**, not the **what**.
-3. Verify against the "What NOT to Document" list below.
-4. Mark the item done in `[ID]-STATUS.md`.
-
-### Step 4 — Final Documentation Checkpoint
+### Step 3 — Final Documentation Checkpoint
 
 Before declaring documentation STABLE, verify every item in the "During a Checkpoint" section at the bottom of this skill.
 
