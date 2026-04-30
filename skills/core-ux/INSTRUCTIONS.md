@@ -146,6 +146,7 @@ The user learns how the interface works from the first interaction. If you chang
 - Icons always mean the same thing everywhere in the app
 - The tone of messages (formal, informal, technical) is consistent throughout the app
 - The positions of recurring elements (navigation, actions) don't change between screens
+- **Heading capitalisation**: one convention is chosen in `[ID]-BRAND.md` (Title Case, Sentence case, or ALL CAPS) and applied to every heading, label, button, and nav item across the entire interface — no mixing. If no brand brief exists yet, AI chooses based on tone and records it before writing any UI text.
 
 **External consistency:** when possible, follow the conventions of the target platform. On mobile, the back button is top-left. On the web, the logo top-left goes to home. Don't reinvent where it's not needed.
 

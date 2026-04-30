@@ -156,6 +156,7 @@ At the end of both paths, create the `BRAND-BRIEF.md` file in the project folder
 - Border radius: [e.g., rounded / sharp / mixed]
 - Shadows: [e.g., light / none / pronounced]
 - Dark mode planned: [yes / no / future]
+- Heading capitalisation: [Title Case / Sentence case / ALL CAPS] — AI chooses based on brand tone; user can override at any time
 
 ## Strategy
 
