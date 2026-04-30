@@ -34,7 +34,7 @@ Every audit MUST produce these six files in the root directory, prefixed with `A
 - **Content**:
   - Naming Convention Review (English? Descriptive?).
   - Architecture Review (Separation of concerns?).
-  - UI/UX Review (Tokens? Hierarchy?).
+  - UI/UX Review (Tokens? Hierarchy? Heading capitalisation — is one convention used consistently across all headings, labels, buttons, and nav items, or is it mixed?).
   - Performance Hotspots (Visual bloat, heavy bundles).
 
 ### 4. `AUDIT-SECURITY.md` (Safety Scan)
