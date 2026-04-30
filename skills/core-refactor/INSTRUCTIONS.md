@@ -2,18 +2,18 @@
 name: core-refactor
 category: quality
 description: >
-  Executes the Refactor Directive from [ID]-PLAYBOOK.md, fix-by-fix (CRITICAL → HIGH → MEDIUM → LOW).
-  All rewritten files go into a [ID]-REFACTOR/ sandbox — originals are never touched.
-  Produces SWAP-GUIDE.md with exact commands to apply changes when approved.
-  Primary input: [ID]-PLAYBOOK.md. Never run without it.
+  Executes the Refactor Directive from [ID]-AUDIT-v[N]/PLAYBOOK.md, fix-by-fix (CRITICAL → HIGH → MEDIUM → LOW).
+  All rewritten files go into a versioned [ID]-REFACTOR-v[N]/ sandbox — originals are never touched.
+  Produces SWAP-GUIDE.md inside the sandbox with exact commands to apply changes when approved.
+  Primary input: [ID]-AUDIT-v[N]/PLAYBOOK.md. Never run without it.
 ---
 
 # Refactor Engine — Systematic Code Rewriting
 
-This skill executes what the audit already planned. Your primary input is `[ID]-PLAYBOOK.md` — it tells you which fixes to make, in what order, and which skill governs each one. You do not re-analyze the codebase. You execute.
+This skill executes what the audit already planned. Your primary input is `[ID]-AUDIT-v[N]/PLAYBOOK.md` — it tells you which fixes to make, in what order, and which skill governs each one. You do not re-analyze the codebase. You execute.
 
 **Two cardinal rules:**
-1. **Originals are sacred** — every rewritten file goes into `[ID]-REFACTOR/`. Never touch the source.
+1. **Originals are sacred** — every rewritten file goes into `[ID]-REFACTOR-v[N]/`. Never touch the source.
 2. **Scope is sacred** — fix only what the Playbook identified. Nothing else.
 
 ---
@@ -24,14 +24,17 @@ All work happens inside a dedicated mirror folder at the project root.
 
 ```
 [project-root]/
-├── src/                          ← ORIGINAL — never touched, reference only
-├── [ID]-REFACTOR/                ← SANDBOX — all new versions go here
-│   └── src/
-│       └── [only changed files, mirroring original paths]
-├── [ID]-PLAYBOOK.md              ← your primary input
-├── AUDIT-PLAN.md                 ← detailed fix list (reference when you need detail)
-└── SWAP-GUIDE.md                 ← generated as fixes complete
+├── src/                            ← ORIGINAL — never touched, reference only
+├── [ID]-AUDIT-v1/                  ← audit outputs (read-only reference)
+│   ├── PLAYBOOK.md                 ← your primary input
+│   └── AUDIT-PLAN.md               ← detailed fix list (reference when you need detail)
+├── [ID]-REFACTOR-v1/               ← SANDBOX — all rewritten files go here
+│   ├── src/
+│   │   └── [only changed files, mirroring original paths]
+│   └── SWAP-GUIDE.md               ← generated as fixes complete
 ```
+
+**Version rule**: match the refactor version to the audit version you are executing. If running from `[ID]-AUDIT-v2/PLAYBOOK.md`, create `[ID]-REFACTOR-v2/`. Check for existing `[ID]-REFACTOR-v*/` folders and increment if needed.
 
 **Mirror only files being changed.** Preserve the exact same relative path as the original.
 
@@ -41,37 +44,37 @@ All work happens inside a dedicated mirror folder at the project root.
 
 Before the first fix, confirm all of these:
 
-- [ ] `[ID]-PLAYBOOK.md` exists and has been approved by the user.
-- [ ] `AUDIT-PLAN.md` exists for detailed reference.
+- [ ] `[ID]-AUDIT-v[N]/PLAYBOOK.md` exists and has been approved by the user.
+- [ ] `[ID]-AUDIT-v[N]/AUDIT-PLAN.md` exists for detailed reference.
 - [ ] User has confirmed: *"Proceed with refactor"* — do not self-start.
-- [ ] `[ID]-REFACTOR/` folder created.
-- [ ] `SWAP-GUIDE.md` initialized (see template below).
+- [ ] `[ID]-REFACTOR-v[N]/` folder created (version matches the audit being executed).
+- [ ] `[ID]-REFACTOR-v[N]/SWAP-GUIDE.md` initialized (see template below).
 - [ ] `[ID]-STATUS.md` updated: `OPERATION_MODE: BUILD`, `CURRENT_PHASE: PHASE 2`.
 
-### Initialize SWAP-GUIDE.md
+### Initialize `[ID]-REFACTOR-v[N]/SWAP-GUIDE.md`
 ```markdown
-# Swap Guide — [PROJECT_ID]
-> Run these commands ONLY after reviewing and approving all files in [ID]-REFACTOR/.
+# Swap Guide — [PROJECT_ID] v[N]
+> Based on: [ID]-AUDIT-v[N]/PLAYBOOK.md
+> Run these commands ONLY after reviewing and approving all files in [ID]-REFACTOR-v[N]/.
 
 ## ⚠️ Before You Swap
-- [ ] Review every file in `[ID]-REFACTOR/` against its original
+- [ ] Review every file in `[ID]-REFACTOR-v[N]/` against its original
 - [ ] Confirm the project still runs from the original
 - [ ] core-quality checkpoint passed
 
 ## Swap Commands
-[filled automatically as fixes complete]
+[filled automatically as fixes complete — one line per changed file]
 
 ## After Swap
-1. Delete `[ID]-REFACTOR/` folder
+1. Archive `[ID]-REFACTOR-v[N]/` (do not delete — keep for reference)
 2. Run the project and verify
-3. Commit: `refactor([scope]): apply playbook fixes`
 ```
 
 ---
 
 ## ⚙️ The Execution Loop (One Fix at a Time)
 
-Read the **Refactor Directive** section of `[ID]-PLAYBOOK.md`. Work through it in order: CRITICAL → HIGH → MEDIUM → LOW.
+Read the **Refactor Directive** section of `[ID]-AUDIT-v[N]/PLAYBOOK.md`. Work through it in order: CRITICAL → HIGH → MEDIUM → LOW.
 
 ### Step 1 — Declare
 Before touching any file, state:
@@ -90,7 +93,7 @@ Read the source file as reference. Only the files this fix needs.
 ### Step 4 — Write to Sandbox
 Create the rewritten file at `[ID]-REFACTOR/[original/path/file.ext]`.
 - Fix only the identified problem.
-- If the fix reveals a new issue not in the Playbook, add it as LOW in `AUDIT-PLAN.md` and continue.
+- If the fix reveals a new issue not in the Playbook, add it as LOW in `[ID]-AUDIT-v[N]/AUDIT-PLAN.md` and continue.
 - Do not mix refactor with feature additions.
 
 ### Step 5 — Verify
@@ -100,14 +103,14 @@ Compare new file against original:
 - If tests exist: run them. If not: describe the manual check.
 
 ### Step 6 — Update Records
-**`AUDIT-PLAN.md`**:
+**`[ID]-AUDIT-v[N]/AUDIT-PLAN.md`**:
 ```
 - [x] [LEVEL] `file/path.ts` — description ✅ Fixed [date]
 ```
-**`SWAP-GUIDE.md`** — add the swap command:
+**`[ID]-REFACTOR-v[N]/SWAP-GUIDE.md`** — add the swap command:
 ```bash
 # Fix: [short description]
-cp [ID]-REFACTOR/src/services/user.ts src/services/user.ts
+cp [ID]-REFACTOR-v[N]/src/services/user.ts src/services/user.ts
 ```
 
 ### Step 7 — Checkpoint Gate

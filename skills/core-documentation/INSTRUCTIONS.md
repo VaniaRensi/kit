@@ -14,22 +14,26 @@ Documentation has a dual problem: too little and nobody understands the code. To
 
 Documentation is not freeform writing. Follow this sequence every time.
 
-### Step 1 — Read the Playbook
+### Step 1 — Set Up the Output Folder
 
-If the project went through AUDIT mode, `[ID]-PLAYBOOK.md` already exists. Read the **Documentation Blueprint** section. It tells you exactly which documents to produce and which audit report contains the raw material for each. Do not re-read the raw audit reports unless you need a specific detail — the Playbook is your task list.
+All documentation outputs go into a versioned folder: `[ID]-DOCUMENT-v[N]/`. Check for existing `[ID]-DOCUMENT-v*/` folders, take the highest N, create `[ID]-DOCUMENT-v[N+1]/`. Default to `v1` if none exist.
+
+### Step 2 — Read the Playbook
+
+If the project went through AUDIT mode, `[ID]-AUDIT-v[N]/PLAYBOOK.md` already exists. Read the **Documentation Blueprint** section — it tells you exactly which documents to produce and which audit report contains the raw material. Use the latest audit version unless the user specifies otherwise. Do not re-read raw audit reports unless you need a specific detail.
 
 If no Playbook exists (BUILD mode or fresh project), read `[ID]-BRAND.md` and `[ID]-ARCHITECTURE.md` as your primary context before writing anything.
 
-### Step 2 — Write Each Document
+### Step 3 — Write Each Document
 
-Work through the Playbook's Documentation Blueprint one document at a time:
+Work through the Playbook's Documentation Blueprint one document at a time. Save all output files inside `[ID]-DOCUMENT-v[N]/`.
 1. Read the raw material file listed for that document.
 2. Load the referenced skill — it defines the standard for that document type.
 3. Apply the Core Principle: document the **why**, not the **what**.
 4. Verify against the "What NOT to Document" list below.
 5. Mark done in `[ID]-STATUS.md`.
 
-### Step 3 — Final Documentation Checkpoint
+### Step 4 — Final Documentation Checkpoint
 
 Before declaring documentation STABLE, verify every item in the "During a Checkpoint" section at the bottom of this skill.
 
