@@ -10,10 +10,10 @@ tags: [naming, conventions, readability, english, code-style]
 use_with: [core-architecture]
 principles:
   - name: "English First"
-    summary: "All code identifiers in English — always. Italian only for user-facing text and AI communication."
-    what: "Every variable, function, class, file, and commit message is written in English. The only exception is content that the end user reads directly."
-    why: "Code is read globally. English identifiers work with all documentation, all Stack Overflow answers, all AI tools. Mixed-language code forces every reader to switch contexts."
-    without: "Italian variable names in a TypeScript file break autocomplete context, confuse AI tools, and block collaboration with any non-Italian developer."
+    summary: "All code identifiers in English — always. Other languages only for user-facing text or specific local contexts."
+    what: "Every variable, function, class, file, and commit message is written in English. The only exception is content that the end user reads directly in their local language."
+    why: "Code is read globally. English identifiers work with all documentation, all Stack Overflow answers, and all AI tools. Mixed-language code forces every reader to switch contexts."
+    without: "Mixing local languages into a codebase breaks autocomplete context, confuses global AI tools, and blocks collaboration with international developers."
     bad: |
       const utente = await getUtente(id)
       const carrello = utente.carrelloAttuale

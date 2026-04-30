@@ -14,47 +14,112 @@ principles:
     summary: "Size, weight, and contrast communicate importance, guiding the user's eye."
     what: "Use visual weight to establish a clear order of importance. The most critical action or information must be the most prominent."
     why: "Users scan before they read. Clear hierarchy reduces cognitive load and directs focus."
-    bad: "Multiple primary buttons or headings of the same size competing for attention."
-    good: "One clear primary action, with secondary and tertiary information styled progressively lighter."
+    bad: |
+      <div style="padding: 20px; background: #1a1a1a; border-radius: 8px;">
+        <h1 style="font-size: 24px; margin: 0; color: white;">Welcome to Dashboard</h1>
+        <h1 style="font-size: 24px; margin: 10px 0; color: white;">Recent Transactions</h1>
+        <h1 style="font-size: 24px; margin: 0; color: white;">System Status</h1>
+      </div>
+    good: |
+      <div style="padding: 20px; background: #1a1a1a; border-radius: 8px;">
+        <h1 style="font-size: 32px; font-weight: 800; margin: 0; color: white;">Dashboard</h1>
+        <h2 style="font-size: 18px; font-weight: 400; margin: 5px 0 20px; color: #888;">Your daily summary at a glance</h2>
+        <h3 style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #6366f1;">Recent Activity</h3>
+      </div>
 
   - name: "Spatial Consistency"
     summary: "Use a fixed scale for spacing to signal relationships and create rhythm."
     what: "Spacing follows a predefined scale. Proximity determines relationship: related elements are grouped tightly, unrelated elements are separated clearly."
     why: "Rhythm creates a predictable, professional feel that users trust subconsciously."
-    bad: "Varying gaps between similar elements (e.g., 10px here, 15px there)."
-    good: "Every gap is a step on a consistent scale (e.g., 4, 8, 16, 32, 64)."
+    bad: |
+      <div style="background: #1a1a1a; padding: 20px; border-radius: 8px;">
+        <div style="margin-bottom: 13px; color: white;">Item 1</div>
+        <div style="margin-bottom: 27px; color: white;">Item 2</div>
+        <div style="margin-top: 19px; color: #6366f1; font-weight: bold;">New Section</div>
+      </div>
+    good: |
+      <div style="background: #1a1a1a; padding: 20px; border-radius: 8px;">
+        <div style="margin-bottom: 8px; color: white;">Item 1</div>
+        <div style="margin-bottom: 8px; color: white;">Item 2</div>
+        <div style="margin-top: 32px; color: #6366f1; font-weight: bold;">New Section</div>
+      </div>
 
   - name: "Universal Readability"
     summary: "Optimize line length, line height, and contrast for effortless consumption."
     what: "Maintain optimal line lengths (typically 60-75 characters), sufficient leading (line height), and high contrast between text and background."
     why: "Prevents eye fatigue and ensures the content is accessible to all users in various lighting conditions."
-    bad: "Light gray text on white, or paragraphs that span the entire width of a wide screen."
-    good: "High contrast (WCAG AA 4.5:1), generous line height, and constrained paragraph widths."
+    bad: |
+      <div style="background: white; color: #e5e5e5; padding: 30px; font-size: 11px; line-height: 1.1; border-radius: 8px;">
+        <p>This text has extremely low contrast and poor spacing. It is nearly impossible for most users to read comfortably, especially on mobile devices or in bright environments.</p>
+      </div>
+    good: |
+      <div style="background: white; color: #171717; padding: 30px; font-size: 18px; line-height: 1.6; border-radius: 8px; max-width: 60ch;">
+        <p><strong>Perfect Contrast & Rhythm.</strong> This text uses a high-contrast ratio, a generous line height, and a constrained width for an effortless reading experience.</p>
+      </div>
 
   - name: "Visual Harmony & Color Restriction"
     summary: "Elegance comes from a restricted palette with high internal variance."
     what: "Use a maximum of 3–4 base colors. Create depth and distinction using shades (lightness) and alpha (transparency) of those core colors, rather than introducing new ones."
     why: "A narrow palette ensures a professional and 'together' look. It prevents the interface from becoming a 'circus' of competing, uncoordinated colors."
-    bad: "A project with 12 different colors for different types of alerts or sections."
-    good: "A cohesive system where backgrounds and borders are all derived from the core brand colors."
+    bad: |
+      <div style="display: flex; gap: 10px; padding: 20px; background: #1a1a1a; border-radius: 8px;">
+        <div style="width: 40px; h-40px; height: 40px; background: red;"></div>
+        <div style="width: 40px; h-40px; height: 40px; background: blue;"></div>
+        <div style="width: 40px; h-40px; height: 40px; background: green;"></div>
+        <div style="width: 40px; h-40px; height: 40px; background: orange;"></div>
+      </div>
+    good: |
+      <div style="display: flex; gap: 10px; padding: 20px; background: #1a1a1a; border-radius: 8px;">
+        <div style="width: 40px; height: 40px; background: #6366f1;"></div>
+        <div style="width: 40px; height: 40px; background: rgba(99, 102, 241, 0.5);"></div>
+        <div style="width: 40px; height: 40px; background: rgba(99, 102, 241, 0.2);"></div>
+        <div style="width: 40px; height: 40px; border: 1px solid rgba(99, 102, 241, 0.3);"></div>
+      </div>
 
   - name: "Layered Distinction"
     summary: "Every UI layer must be visually distinguishable from the one below it."
     what: "Ensure that containers (cards, panels, modals) stand out from their background using contrast, borders, or shadows. Layers must never blend together."
     why: "Distinct layers communicate structure and depth, helping the user understand the layout's organization."
-    bad: "A card background that is too similar to the page background, making boundaries invisible."
-    good: "Clear visual separation between the background, the surface, and the content."
+    bad: |
+      <div style="background: #1a1a1a; padding: 40px; border-radius: 8px;">
+        <div style="background: #1b1b1b; padding: 20px; border-radius: 4px;">
+          Invisible Layer: This card background is too similar to the page.
+        </div>
+      </div>
+    good: |
+      <div style="background: #1a1a1a; padding: 40px; border-radius: 8px;">
+        <div style="background: #262626; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5); padding: 20px; border-radius: 4px;">
+          Distinct Layer: Clear separation via contrast, border, and shadow.
+        </div>
+      </div>
 
   - name: "Action Feedback"
     summary: "Communicate the state of every interaction: loading, success, or error."
     what: "Every user action must trigger a visible state change that confirms the system is processing, has succeeded, or has failed."
     why: "Feedback builds trust and prevents users from repeating actions or feeling lost."
-    bad: "A button that doesn't change appearance after being clicked during a long process."
-    good: "Loading spinners, success toasts, and clear error messages with recovery steps."
+    bad: |
+      <button style="background: #6366f1; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+        Save Changes
+      </button>
+      <p style="color: #666; font-size: 12px; margin-top: 8px;">(Clicking does nothing visually during the 2s save)</p>
+    good: |
+      <button style="background: #6366f1; color: white; padding: 10px 20px; border: none; border-radius: 4px; opacity: 0.5; cursor: not-allowed; display: flex; align-items: center; gap: 8px;">
+        <span style="width: 12px; height: 12px; border: 2px solid white; border-top-color: transparent; border-radius: 50%; display: inline-block;"></span>
+        Saving...
+      </button>
 
   - name: "Information Focus"
     summary: "Each view has one primary goal. Secondary actions must not compete."
     what: "Limit each screen to one primary call-to-action. Isolate destructive or complex operations."
     why: "Reduces decision fatigue and guides the user toward the intended outcome."
-    bad: "Three bright blue buttons of the same size in the same row."
-    good: "One prominent primary button, secondary actions as outlines or text links."
+    bad: |
+      <div style="display: flex; gap: 10px;">
+        <button style="background: #6366f1; color: white; padding: 10px 20px; border: none; border-radius: 4px;">Sign Up</button>
+        <button style="background: #6366f1; color: white; padding: 10px 20px; border: none; border-radius: 4px;">Log In</button>
+        <button style="background: #6366f1; color: white; padding: 10px 20px; border: none; border-radius: 4px;">Explore</button>
+      </div>
+    good: |
+      <div style="display: flex; gap: 15px; align-items: center;">
+        <button style="background: #6366f1; color: white; padding: 10px 20px; border: none; border-radius: 4px; font-weight: bold;">Get Started</button>
+        <button style="background: transparent; color: #6366f1; padding: 10px 20px; border: 1px solid #6366f1; border-radius: 4px;">Log In</button>
+      </div>

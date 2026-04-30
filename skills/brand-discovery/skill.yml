@@ -21,15 +21,38 @@ principles:
     summary: "Limit the core identity to 3–4 base colors. Elegance comes from restriction, not abundance."
     what: "Select a maximum of three core colors (Primary, Secondary, Accent) plus a Neutral role. Do not add new colors for specific features; use shades and transparencies of the existing palette."
     why: "A restricted palette prevents the 'circus effect' where too many colors compete for attention. It creates a professional, harmonious, and sophisticated visual language."
-    bad: "Adding a new purple for the 'Features' section and a different orange for 'Pricing' when those colors aren't in the brand palette."
-    good: "Using a 10% transparency of the Primary color for section backgrounds and a 50% shade of the Neutral color for borders."
+    bad: |
+      <div style="display: flex; gap: 8px; padding: 20px; background: #1a1a1a; border-radius: 8px;">
+        <div style="width: 40px; height: 40px; background: #3b82f6; border-radius: 50%;"></div>
+        <div style="width: 40px; height: 40px; background: #ef4444; border-radius: 50%;"></div>
+        <div style="width: 40px; height: 40px; background: #10b981; border-radius: 50%;"></div>
+        <div style="width: 40px; height: 40px; background: #f59e0b; border-radius: 50%;"></div>
+        <div style="width: 40px; height: 40px; background: #8b5cf6; border-radius: 50%;"></div>
+      </div>
+    good: |
+      <div style="display: flex; gap: 8px; padding: 20px; background: #1a1a1a; border-radius: 8px;">
+        <div style="width: 40px; height: 40px; background: #6366f1; border-radius: 50%;"></div>
+        <div style="width: 40px; height: 40px; background: rgba(99, 102, 241, 0.6); border-radius: 50%;"></div>
+        <div style="width: 40px; height: 40px; background: rgba(99, 102, 241, 0.3); border-radius: 50%;"></div>
+        <div style="width: 40px; height: 40px; background: #facc15; border-radius: 50%;"></div>
+      </div>
 
   - name: "Perceptual Shade Intent"
     summary: "Define how colors will vary (shades and alpha) before generating the token system."
     what: "For each base color, define the intent for its scale: which shades will be used for subtle backgrounds, which for hover states, and which for high-contrast text."
     why: "Allows the design system to handle all UI states (active, disabled, subtle, bold) while remaining strictly within the brand's harmonious color space."
-    bad: "Guessing hex values for a 'lighter blue' in the middle of development."
-    good: "Specifying in the brief that 'Primary-100' (10% lightness) will be the standard subtle background across the app."
+    bad: |
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 20px; background: #1a1a1a; border-radius: 8px;">
+        <div style="color: #6366f1; font-weight: bold;">Main Action</div>
+        <div style="color: #38bdf8;">Hover (Random lighter blue)</div>
+        <div style="color: #cbd5e1;">Disabled (Random gray)</div>
+      </div>
+    good: |
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 20px; background: #1a1a1a; border-radius: 8px;">
+        <div style="color: #6366f1; font-weight: bold;">Main Action</div>
+        <div style="color: rgba(99, 102, 241, 0.8);">Hover (Same hue, lower alpha)</div>
+        <div style="color: rgba(99, 102, 241, 0.4);">Disabled (Same hue, 40% alpha)</div>
+      </div>
 
   - name: "Proactive Inquiry"
     summary: "Don't settle for short answers. Dig for the 'Why' and the 'Feeling' until the vision is clear."
