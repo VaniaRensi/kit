@@ -167,6 +167,28 @@ Accessibility is not an optional feature — it's the minimum to avoid excluding
 
 ---
 
+## Principle 9 — Visual Balance in Grids
+
+When elements are placed side by side in a grid or row, they must be visually balanced. Uneven heights, misaligned titles, and floating buttons are signs of an unfinished interface.
+
+**The rules:**
+- Cards in the same row are always the same height — no card is shorter because it has less content
+- Elements that repeat across cards (title, subtitle, CTA) align to the same baseline across the row
+- The primary action (button, link) is always at the bottom of the card — never floating mid-card because the card above it has less text
+- A grid of cards must feel like a table: structured, predictable, scannable
+
+**Why this matters:**
+A user scanning a row of cards reads them top-to-bottom. If the button on card 2 is higher than the button on card 1, the eye loses its rhythm. The interface feels unpolished even if every individual card looks fine in isolation. Balance is a property of the group, not the individual element.
+
+**Anti-patterns:**
+- Two cards side by side with different heights because one has a longer description
+- A "Learn More" button at different vertical positions across a card row
+- A title on line 1 of card A and line 2 of card B because card B has a longer title
+
+**Implementation:** this principle is achieved through CSS Grid (equal-height rows) and Flexbox column layout inside each card. See `web-ux-ui` for the exact pattern.
+
+---
+
 ## How to Apply in an Audit
 
 When analyzing an existing interface, verify in order:
@@ -176,7 +198,8 @@ When analyzing an existing interface, verify in order:
 3. **Readability:** is the text readable? Is the contrast sufficient? Are lines too long?
 4. **Feedback:** does the app communicate loading/success/error? Are error messages clear?
 5. **Consistency:** do similar elements behave the same way? Are icons consistent?
-6. **Accessibility:** can you navigate with a keyboard? Do images have alt text?
+6. **Grid balance:** in card grids and rows, are cards equal height? Are CTAs pinned to the bottom?
+7. **Accessibility:** can you navigate with a keyboard? Do images have alt text?
 
 ---
 
