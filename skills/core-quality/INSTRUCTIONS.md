@@ -139,50 +139,6 @@ Author: Vania
 Reason: needed for passwordless user onboarding
 ```
 
-### Automatic Commit Message Generation
-
-At every checkpoint, **don't just remind to commit** — always propose the complete message, ready to use, in this format:
-
-```
-📝 Suggested commit message:
-
-git commit -m "feat(dashboard): complete live data visualization
-
-Author: [current user name]
-Reason: dashboard milestone completed and verified at checkpoint"
-```
-
-The user copies, pastes, and changes only their name if needed. Zero effort.
-
-If the change involves the **shared base skills** (the `ai-kit-base/` folder), add the `[SKILL-BASE]` tag to the commit and explicitly flag it:
-
-```
-📝 Suggested commit message (skill base change — affects all team projects):
-
-git commit -m "fix(skill-base/security): add CORS check for production [SKILL-BASE]
-
-Author: [name]
-Reason: missing CORS validation for multi-domain environments
-Impact: applies to all future projects"
-```
-
-### When to Commit
-Commit frequently to create "Save Points." Don't wait for the end of the day.
-
-- **Atomic Commits**: Commit one logical change at a time (e.g., "Add login button", then "Fix login validation").
-- **After every Checkpoint**: Once an area is marked as STABLE, commit it immediately.
-- **After major fixes**: If you spent 30 minutes fixing a bug, commit it once it works.
-- **Before major refactors**: Save the current state before you start changing everything.
-- **🚨 COMMIT AUTHORIZATION**: Before executing any `git commit` or `git push` command, you MUST stop and explicitly ask: *"I have completed [task/checkpoint], may I proceed with the commit and push?"*. Never assume the user wants to push immediately, especially if the push triggers an automatic deploy (Vercel/Netlify).
-- **Never** commit code that doesn't build or has red tests.
-
-### When to Push to GitHub
-Pushing moves your "Save Points" to the cloud. Do it to prevent data loss.
-
-- **After every Milestone**: When a major feature is finished and committed, push to the remote.
-- **End of Session (MANDATORY)**: Before finishing work for the day, push all your commits to GitHub.
-- **Before switching agents**: If you are transitioning from Architect to Coder, push the state so the new agent can pull the latest changes.
-- **Syncing**: If you are working in a team, pull before you start and push after you finish.
 
 ---
 
@@ -199,7 +155,7 @@ After running the checkpoint, report as follows:
    - [problem 2 description] → [solution applied]
 ✅ Testing: minimum coverage present
 ✅ Performance: no relevant issues
-✅ Git: commit ready (see below)
+✅ Git: ready to commit
 
 ## 🏁 Skill Path & Next Step
 

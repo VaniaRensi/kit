@@ -57,7 +57,6 @@ Every task follows this loop:
 1.  **Initialization Statement**: Output the statement as defined in `MASTER-RULES.md`.
 2.  **Confirm Goal**: State the specific milestone being worked on.
 3.  **Checkpoint**: Once stable, run the `core-quality` or `core-audit` checks.
-4.  **Commit**: Propose a structured commit message.
 
 ---
 
