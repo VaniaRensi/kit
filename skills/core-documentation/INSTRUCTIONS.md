@@ -195,7 +195,8 @@ In the documentation review, verify:
 2. **Objective**: Make the project understandable and maintainable long-term.
 3. **Recommended Next Step**:
    - If documentation is complete → Load `core-phases` to generate the final handover package.
-   - If UX copy or SEO needs work → Load `core-ux` (Phase 4: LAUNCH).
+   - If SEO metadata or content needs work → Load `web-seo` (Phase 2: BUILD).
+   - If UX copy or interface language needs work → Load `core-ux` (Phase 4: LAUNCH).
    - If architectural decisions are undocumented → Load `core-architecture` and read before writing.
    - If brand voice is unclear → Load `brand-discovery` and read `[ID]-BRAND.md` first.
 4. **Where this skill sits in the flow**:

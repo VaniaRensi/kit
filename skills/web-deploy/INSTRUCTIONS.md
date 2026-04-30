@@ -85,16 +85,37 @@ Run sections in order. If you find problems, fix them before moving to the next 
 
 ---
 
-## 5. Basic SEO
+## 5. SEO — Launch Verification
 
-- Every page has a unique and descriptive `<title>` (not "Home" or the framework name)
-- Every page has a meta description (150-160 characters)
-- Significant images have the `alt` attribute filled in
-- The canonical URL is defined for pages with duplicatable content
-- A `robots.txt` exists (even minimal)
-- A `sitemap.xml` exists if the site has multiple indexable pages
-- Pages that should not be indexed (admin, private dashboard) have `noindex`
-- Internal links work — no broken links
+> The per-page SEO work (content, metadata, image optimization, internal linking) should have been done during BUILD using `web-seo`. This section verifies the launch-critical items that only make sense once the full site exists.
+
+**Indexability**
+- `robots.txt` exists and is correctly configured — not blocking pages that should be indexed
+- Admin, dashboard, and private routes have `<meta name="robots" content="noindex">` 
+- `sitemap.xml` exists, includes all public indexable routes, and is submitted to Google Search Console
+
+**Canonical URLs**
+- Every page with duplicatable content has a canonical URL defined
+- Paginated content (e.g., `/blog?page=2`) has canonical pointing to the base URL or uses `rel="next"` / `rel="prev"`
+- www and non-www versions redirect to one canonical domain (verified in Production Configuration above)
+
+**Social & Rich Visibility**
+- Every public page has OpenGraph tags: `og:title`, `og:description`, `og:image`, `og:url`
+- Twitter/X cards are configured: `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
+- OG images exist and are the correct dimensions (1200×630px)
+- JSON-LD structured data is present for the content type (Article, Product, BreadcrumbList, etc.)
+- If multilingual: `hreflang` attributes are set for each language/region pair
+
+**Core Web Vitals**
+- LCP (Largest Contentful Paint) < 2.5s on mobile
+- CLS (Cumulative Layout Shift) < 0.1 — all images have `width` and `height` set
+- INP (Interaction to Next Paint) < 200ms
+- Run: `npx lighthouse [url] --emulated-form-factor=mobile` and verify all three pass
+
+**Content Verification**
+- All pages have unique `<title>` and `<meta description>` — no two pages share the same values
+- No placeholder text ("Lorem ipsum", "TODO", "Coming soon") on indexed pages
+- Internal links verified — no broken links on public pages
 
 ---
 
@@ -132,6 +153,7 @@ Run sections in order. If you find problems, fix them before moving to the next 
 1. **Current State**: PHASE 2: BUILD / PHASE 3: CONTROL (Category: **DEVELOPMENT**).
 2. **Objective**: Verify that the project is technically ready for production.
 3. **Recommended Next Step**:
-   - If deploy is complete → Skill: `core-documentation` or SEO (Phase 4: LAUNCH).
-   - If structural changes are needed before launch → Skill: `web-ux-ui`.
+   - If deploy is complete → Load `core-documentation` (Phase 4: LAUNCH).
+   - If SEO per-page work is incomplete → Load `web-seo` and complete it before deploying.
+   - If structural changes are needed before launch → Load `web-ux-ui`.
 4. **Tool Tip**: A code-specialized agent ("Builder") is necessary here to handle server configurations and environment variables.

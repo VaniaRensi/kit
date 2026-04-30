@@ -37,6 +37,7 @@ Ensure all interactive elements (buttons, links, inputs) have:
 1. **Current State**: PHASE 2: BUILD (Category: **DEVELOPMENT**).
 2. **Objective**: Implement professional, accessible, and high-performance web interfaces.
 3. **Recommended Next Step**:
-   - If the UI is ready → Skill: `core-quality` for quality control (Phase 3: CONTROL).
-   - If a UX review is needed → Skill: `core-ux` (Phase 1: FOUNDATION).
+   - When creating each new page → Load `web-seo` to set metadata, images, and internal links before moving on.
+   - If the UI is ready → Load `core-quality` for quality control (Phase 3: CONTROL).
+   - If a UX review is needed → Load `core-ux` (Phase 1: FOUNDATION).
 4. **Tool Tip**: A code-specialized agent ("Builder") is essential here to handle component and styling complexity.

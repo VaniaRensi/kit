@@ -49,7 +49,7 @@ When the user says "Ready for the next phase" or when a phase transition occurs,
 ### Path 3: PHASE 3 (QUALITY) → PHASE 4 (CONTENT)
 - **When**: Code is STABLE.
 - **Agent Switch**: Recommended to switch to a specialized content/SEO agent to save coding tokens.
-- **Focus**: SEO, Copywriting, User Documentation.
+- **Focus**: SEO (`web-seo` per-page verification, then `web-deploy` launch checklist), Copywriting, User Documentation (`core-documentation`).
 
 ## 🗺️ Handoff Verification
 

@@ -67,14 +67,15 @@ Your behavior is driven by `OPERATION_MODE` and `CURRENT_PHASE`:
 
 - **IF `MODE == BUILD`**:
   - `F1` -> `brand-discovery`, `core-architecture`.
-  - `F2` -> `web-ux-ui`, `web-design-tokens`.
+  - `F2` -> `web-ux-ui`, `web-design-tokens`, `web-seo` (per page: content, metadata, images).
   - `F3` -> `core-quality`.
+  - `F4` -> `web-seo` (verify all pages), `web-deploy` (launch checklist), `core-documentation`.
 - **IF `MODE == AUDIT`**:
   - `F1` -> `core-audit` (Map & Flow).
   - `F3` -> `core-audit` (Quality, Security, Deps, Plan).
   - `F2` (after plan approved) -> `core-refactor` (execute AUDIT-PLAN.md).
 - **IF `MODE == DOCUMENT`**:
-  - `F4` -> `core-documentation`, `core-ux` (SEO).
+  - `F4` -> `core-documentation`.
 
 ---
 

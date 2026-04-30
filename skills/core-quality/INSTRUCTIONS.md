@@ -206,7 +206,7 @@ After running the checkpoint, report as follows:
 1. **Current State**: PHASE 3: CONTROL (Category: **QUALITY**).
 2. **Objective**: Consolidate the code and mark the area as STABLE.
 3. **Recommended Next Step**:
-   - If code is STABLE → Skill: `core-documentation` or SEO (Phase 4: LAUNCH).
-   - If another development cycle is needed → Skill: `web-ux-ui` (Phase 2: BUILD).
+   - If code is STABLE → Load `web-seo` (verify all pages), then `web-deploy` (launch checklist), then `core-documentation` (Phase 4: LAUNCH).
+   - If another development cycle is needed → Load `web-ux-ui` (Phase 2: BUILD).
 4. **Tool Tip**: An agent specialized in "Audit" (like Claude Code) is ideal for this deep cleanup phase.
 ```

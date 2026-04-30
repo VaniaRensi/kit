@@ -63,6 +63,8 @@ You must identify which **Specialization Category** the current task belongs to.
 | **"Technical architecture"** | `core-architecture` | STRATEGY | ANY |
 | **"Start implementation"** | `web-ux-ui` | DEVELOPMENT | BUILD |
 | **"Design system tokens"** | `web-design-tokens` | DEVELOPMENT | BUILD |
+| **"SEO / metadata / images"** | `web-seo` | DEVELOPMENT | BUILD |
+| **"Ready to deploy / go live"** | `web-deploy` | DEVELOPMENT | BUILD |
 | **"Audit / Security check"** | `core-quality` | QUALITY | ANY |
 | **"Switch agents / Handoff"** | `core-phases` | AGNOSTIC | ANY |
 
